@@ -24,6 +24,9 @@ void setBranchesAddresses(TTree* t, Float_t* event_index, Float_t* PID, Float_t*
   t->SetBranchAddress("z",           z);
 }
 
+class DISkinematics{
+}
+
 // Fundamental variables
 Float_t ThetaLab(Float_t Px, Float_t Py, Float_t Pz){
   TVector3 v(Px, Py, Pz);
