@@ -1,7 +1,8 @@
-// Script that takes a .dat file and transforms it into a TTree in a ROOT file
+// Script that takes a .dat file and transforms it into a TNtupe in a ROOT file
 
 // Req: .dat file has to have the following format
 //      <event_index> <particle_id> <parent_id> <px> <py> <pz> <E> <x> <y> <z>
+// Pro Tip: Use lepto2dat.pl (wink wink)
 
 // author : Esteban Molina (May 2022)
 
@@ -22,11 +23,7 @@ int main(int argc, char** argv){
   const char* file_in  = argv[1];
   const char* file_out = argv[2];
 
-  std::cout<<file_in<<std::endl;
-  std::cout<<file_out<<std::endl;
-  
   // Open dat file
-  //  const char* file_in = "lepto_out.dat";
   std::ifstream file(file_in);
 
   // Create Tree that reads file
@@ -68,10 +65,9 @@ int main(int argc, char** argv){
   }
 
   // Create target root file
-  //  TFile* f = new TFile("dat2root_Tuple.root","RECREATE");
   TFile* f = new TFile(file_out,"RECREATE");
-  f->cd();
 
+  f->cd();
   t->Write();
   ntuple_thrown->Write();
   ntuple_thrown_electrons->Write();
