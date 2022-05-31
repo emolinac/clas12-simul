@@ -177,8 +177,6 @@ float HadronicKinematics::getThetaPQ(LeptonicKinematics* lk) {
 float HadronicKinematics::getCosThetaPQ(LeptonicKinematics* lk) {
   // Returns the cosine of ThetaPQ for the particle
   return (this->Pz_h*(kEbeam - lk->getPz_el()) - this->Px_h*lk->getPx_el() - this->Py_h*lk->getPy_el())/(TMath::Sqrt(lk->getNu()*lk->getNu() + lk->getQ2())*this->getP_h());
-
-  return (Pz(k, kind)*(kEbeam - Pz(0, kind)) - Px(k, kind)*Px(0, kind) - Py(k, kind)*Py(0, kind))/(TMath::Sqrt(Nu(kind)*Nu(kind) + Q2(kind))*Momentum(k, kind));
 }
 
 float HadronicKinematics::getZh(LeptonicKinematics* lk) {
