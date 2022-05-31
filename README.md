@@ -6,7 +6,7 @@ Simple package set to obtain simulations in JLAB's farm.
     - *usage* : perl lepto2dat.pl z_shift < lepto_original.out > lepto_out.dat
 - **dat2tuple** : C++ code that takes a file formated by *lepto2dat* and outputs a root file with tuples for the electrons, hadrons, and raw.
     - *usage* :
-       1- Execute make
-       2- ./dat2tuple <input_file_name> <output_file_name>
+       1. Execute make
+       2. ./dat2tuple <input_file_name> <output_file_name>
 ## Reconstructed (GEMC)
 W.I.P.
