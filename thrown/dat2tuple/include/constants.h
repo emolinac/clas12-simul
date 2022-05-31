@@ -1,0 +1,20 @@
+// Constants
+const Float_t kEbeam			= 11.;
+const Float_t kMassGamma		= 0.000000;
+const Float_t kMassPositron		= 5.109998e-4;
+const Float_t kMassElectron		= 5.109998e-4;
+const Float_t kMassNeutrino		= 0.000000;
+const Float_t kMassMuonPlus		= 0.105658;
+const Float_t kMassMuonMinus		= 0.105658;
+const Float_t kMassPiZero		= 0.134977;
+const Float_t kMassPiPlus		= 0.139570;
+const Float_t kMassPiMinus		= 0.139570;
+const Float_t kMassKaonZeroLong		= 0.497614;
+const Float_t kMassKaonPlus		= 0.493677;
+const Float_t kMassKaonMinus		= 0.493677;
+const Float_t kMassNeutron		= 0.939565;
+const Float_t kMassProton		= 0.938272;
+const Float_t kMassKaonZeroShort	= 0.497614;
+const Float_t kMassEta			= 0.547853;
+const Float_t kMassOmega		= 0.782650;
+const Float_t kMassKaonZero		= 0.497614;
