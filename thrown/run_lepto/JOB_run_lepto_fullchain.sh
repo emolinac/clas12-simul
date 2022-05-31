@@ -6,7 +6,7 @@
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=00:05:00
-#SBATCH --array=1-200
+#SBATCH --array=1-5
 
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
 
@@ -64,7 +64,7 @@ executable_file_check(){
 }
 
 ## DIRECTORIES
-LEPTO_dir=~/clas12_simul/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
+LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=~/clas12_simul/thrown/lepto2dat
 dat2tuple_dir=~/clas12_simul/thrown/dat2tuple
