@@ -43,7 +43,6 @@ int main(int argc, char** argv){
   Int_t Nentries = t->GetEntries();
   for(Int_t entry1 = 0 ; entry1 < Nentries ; entry1++){
     t->GetEntry(entry1);
-    double event_match_1 = event_index;
     if(PID==11 && parent_PID==0){
       // Calculate leptonic variables
       LeptonicKinematics lk(Px,Py,Pz);
@@ -58,13 +57,11 @@ int main(int argc, char** argv){
       LeptonicKinematics lk(elP[0],elP[1],elP[2]);
       HadronicKinematics hk(Px,Py,Pz,PID);
 
-      float vars_h[21] = {lk.getQ2(), lk.getXb(), lk.getNu(), hk.getZh(&lk), hk.getPt2(&lk), hk.getPl2(&lk), hk.getThetaPQ(&lk), hk.getPhiPQ(&lk), hk.getThetaLab_h(), hk.getPhiLab_h(), hk.getP_h(), hk.getPx_h(), hk.getPy_h(), hk.getPz_h(), lk.getThetaLab_el(), lk.getPhiLab_el(),lk.getP_el(), lk.getPx_el(), lk.getPy_el(), lk.getPz_el(), PID};
+      float vars_h[21] = {(float) lk.getQ2(), (float) lk.getXb(), (float) lk.getNu(), (float) hk.getZh(&lk), (float) hk.getPt2(&lk),
+			  (float) hk.getPl2(&lk), (float) hk.getThetaPQ(&lk), (float) hk.getPhiPQ(&lk), (float) hk.getThetaLab_h(),
+			  (float) hk.getPhiLab_h(), (float) hk.getP_h(), (float) hk.getPx_h(), (float) hk.getPy_h(), (float) hk.getPz_h(),
+			  (float) lk.getThetaLab_el(), (float) lk.getPhiLab_el(), (float) lk.getP_el(), (float) lk.getPx_el(), (float) lk.getPy_el(), (float) lk.getPz_el(), (float) PID};
 
-      // if(hk.getPt2(&lk) < 0){
-      // 	std::cout<<"PID = "<<PID<<std::endl;
-      // 	std::cout<<"Pt2 = "<<hk.getPt2(&lk)<<std::endl;
-      // 	//	std::cout<<"Pl2 = "<<hk.getPl2(&lk)<<std::endl;
-      // }
       ntuple_thrown->Fill(vars_h);
     }
   }
