@@ -6,7 +6,7 @@
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=00:05:00
-#SBATCH --array=1-1000
+#SBATCH --array=1-2000
 
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
 
@@ -77,7 +77,7 @@ out_dir=/work/clas12/rg-e/emolinac/lepto
 
 ## VARIABLES
 Nevents=1000
-target=Pb
+target=D
 id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
 
