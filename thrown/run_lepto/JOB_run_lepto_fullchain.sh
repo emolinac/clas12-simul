@@ -6,7 +6,7 @@
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=00:05:00
-#SBATCH --array=1-5
+#SBATCH --array=1-1000
 
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
 
@@ -18,21 +18,25 @@ AZ_assignation(){
 	echo "Using Deuterium"
 	A=2
 	Z=1
+	echo "A=${A} and Z=${Z}"
     elif [[ "$1" == "C" ]]
     then
 	echo "Using Carbon"
 	A=12
 	Z=6
+	echo "A=${A} and Z=${Z}"
     elif [[ "$1" == "Fe" ]]
     then
 	echo "Using Iron"
 	A=56
 	Z=26
+	echo "A=${A} and Z=${Z}"
     elif [[ "$1" == "Pb" ]]
     then
 	echo "Using Lead"
 	A=207
 	Z=82
+	echo "A=${A} and Z=${Z}"
     else
 	echo "No target input!"
 	exit 1
@@ -73,7 +77,7 @@ out_dir=/work/clas12/rg-e/emolinac/lepto
 
 ## VARIABLES
 Nevents=1000
-target=D
+target=Pb
 id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
 
@@ -106,7 +110,8 @@ cp ${dat2tuple_dir}/bin/dat2tuple ${temp_dir}/
 ./dat2tuple ${lepto_out}.dat ${lepto_out}_ntuple.root
 
 # Move output to its folder
-mv ${lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
+#mv ${lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
+mv ${lepto_out}_ntuple.root ${out_dir}/
 
 # Remove folder
 rm -rf ${temp_dir}
