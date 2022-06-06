@@ -1,0 +1,78 @@
+This is JOB 57511666 task 63
+>>> Setting software
+====================
+>>> SOFT_DIR            = /home/emolinac/software
+>>> ENV_DIR             = /home/emolinac/software/env_scripts
+
+>>> Setting ROOT v6.10.02
+=========================
+ROOT 6.10.02 was compiled with gcc 4.8.5
+present default gcc is given by gcc -v: 
+ROOT 6.10/02 has been set!
+
+>>> Setting cernlib
+===================
+>>> CERN                = /home/emolinac/software/cernlib
+>>> CERN_LEVEL          = 2005
+>>> CERN_ROOT           = /home/emolinac/software/cernlib/2005
+>>> CERN_LIB            = /home/emolinac/software/cernlib/2005/lib
+>>> CERNLIBDIR          = /home/emolinac/software/cernlib/2005/lib
+>>> CERN_BIN            = /home/emolinac/software/cernlib/2005/bin
+>>> CVSCOSRC            = /home/emolinac/software/cernlib/2005/src
+>>> CERN_INC            = /home/emolinac/software/cernlib/2005/src/include
+>>> CERN_INCLUDEDIR     = /home/emolinac/software/cernlib/2005/src/include
+>>> PATH                = /home/emolinac/software/cernlib/2005/bin:/apps/python/python-2.7.1/bin/:/u/apps/root/6.10.02/root/bin:/usr/bin:/home/emolinac/software/clas_software/bin/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/bin:/apps/python/python-2.7.1/bin/:/u/apps/root/6.10.02/root/bin:/home/emolinac/bin:/home/emolinac/bin/Linux:/apps/bin:/site/bin:/usr/local/bin:/usr/sbin:/usr/bin/X11:/opt/SUNWspro/bin:/opt/ansic/bin:/opt/aCC/bin:/opt/fortran/bin:/opt/fortran90/bin:/opt/langtools/bin:/usr/ccs/bin:/usr/bin:/bin:/usr/dt/bin:/usr/openwin/bin:/etc:/usr/etc:/usr/xpg4/bin:/usr/ucb:/usr/bsd:/sbin:/usr/proc/bin:/opt/imake/bin:.
+>>> LD_LIBRARY_PATH     = /home/emolinac/software/cernlib/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib:/usr/lib64/mysql:/home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib:/usr/lib64/mysql:/home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib
+
+>>> Setting OS_NAME
+===================
+>>> ARCH                = 64bit
+>>> ARCHT               = 64bit
+>>> OS_NAME             = Linux64RHEL7
+>>> OSNAME              = Linux64RHEL7
+
+>>> Setting clas_software
+=========================
+>>> CLAS_ROOT           = /home/emolinac/software/clas_software
+>>> TOPDIR              = /home/emolinac/software/clas_software
+>>> TOP_DIR             = /home/emolinac/software/clas_software
+>>> CLAS_PACK           = /home/emolinac/software/clas_software/packages
+>>> CLAS_CMS            = /home/emolinac/software/clas_software/packages/cms
+>>> CLAS_LIB            = /home/emolinac/software/clas_software/lib/Linux64RHEL7
+>>> CLAS_BIN            = /home/emolinac/software/clas_software/bin/Linux64RHEL7
+>>> CLAS_SLIB           = /home/emolinac/software/clas_software/slib/Linux64RHEL7
+>>> PATH                = /home/emolinac/software/clas_software/bin/Linux64RHEL7:/home/emolinac/software/cernlib/2005/bin:/apps/python/python-2.7.1/bin/:/u/apps/root/6.10.02/root/bin:/usr/bin:/home/emolinac/software/clas_software/bin/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/bin:/apps/python/python-2.7.1/bin/:/u/apps/root/6.10.02/root/bin:/home/emolinac/bin:/home/emolinac/bin/Linux:/apps/bin:/site/bin:/usr/local/bin:/usr/sbin:/usr/bin/X11:/opt/SUNWspro/bin:/opt/ansic/bin:/opt/aCC/bin:/opt/fortran/bin:/opt/fortran90/bin:/opt/langtools/bin:/usr/ccs/bin:/usr/bin:/bin:/usr/dt/bin:/usr/openwin/bin:/etc:/usr/etc:/usr/xpg4/bin:/usr/ucb:/usr/bsd:/sbin:/usr/proc/bin:/opt/imake/bin:.
+>>> LD_LIBRARY_PATH     = /home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/home/emolinac/software/cernlib/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib:/usr/lib64/mysql:/home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib:/usr/lib64/mysql:/home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib
+
+>>> Setting ClasTool
+====================
+>>> CLASTOOL            = /home/emolinac/software/clas_software/packages/ClasTool
+>>> CLAS_TOOL           = /home/emolinac/software/clas_software/packages/ClasTool
+>>> ROOT_INCLUDE_PATH   = /home/emolinac/software/clas_software/packages/ClasTool/include:/home/emolinac/software/clas_software/packages/ClasTool/include:/home/emolinac/software/clas_software/packages/ClasTool/include:
+
+>>> Setting recsis
+==================
+>>> CLAS_PARMS          = /group/clas/parms
+>>> CLAS_CALDB_HOST     = clasdb2021.jlab.org
+>>> CLAS_CALDB_USER     = clasuser
+>>> CLAS_CALDB_DBNAME   = calib
+>>> CLAS_CALDB_RUNINDEX = calib.RunIndex
+>>> RECSIS_RUNTIME      = /group/clas/clsrc/recsis/runtime
+>>> RECSIS              = /home/emolinac/software/clas_software/packages
+
+>>> Setting MySQL
+=================
+>>> MYSQL               = /usr/bin
+>>> MYSQL_LIB_PATH      = /usr/lib64/mysql
+>>> MYSQL_INCLUDE_PATH  = /usr/include/mysql
+>>> MYSQLLIB            = /usr/lib64/mysql
+>>> MYSQLBIN            = /usr/bin
+>>> MYSQLINC            = /usr/include/mysql
+>>> MYSQL_LIB           = /usr/lib64/mysql
+>>> MYSQL_BIN           = /usr/bin
+>>> MYSQL_INC           = /usr/include/mysql
+>>> MYSQL_INCLUDE       = /usr/include/mysql
+>>> PATH                = /usr/bin:/home/emolinac/software/clas_software/bin/Linux64RHEL7:/home/emolinac/software/cernlib/2005/bin:/apps/python/python-2.7.1/bin/:/u/apps/root/6.10.02/root/bin:/usr/bin:/home/emolinac/software/clas_software/bin/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/bin:/apps/python/python-2.7.1/bin/:/u/apps/root/6.10.02/root/bin:/home/emolinac/bin:/home/emolinac/bin/Linux:/apps/bin:/site/bin:/usr/local/bin:/usr/sbin:/usr/bin/X11:/opt/SUNWspro/bin:/opt/ansic/bin:/opt/aCC/bin:/opt/fortran/bin:/opt/fortran90/bin:/opt/langtools/bin:/usr/ccs/bin:/usr/bin:/bin:/usr/dt/bin:/usr/openwin/bin:/etc:/usr/etc:/usr/xpg4/bin:/usr/ucb:/usr/bsd:/sbin:/usr/proc/bin:/opt/imake/bin:.
+>>> LD_LIBRARY_PATH     = /usr/lib64/mysql:/home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/home/emolinac/software/cernlib/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib:/usr/lib64/mysql:/home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib:/usr/lib64/mysql:/home/emolinac/software/clas_software/lib/Linux64RHEL7:/home/emolinac/software/clas_software/slib/Linux64RHEL7:/apps/cernlib/x86_64_rhel7/2005/lib:/apps/python/python-2.7.1/lib:/u/apps/root/6.10.02/root/lib
+Using Deuterium
+A=2 and Z=1
