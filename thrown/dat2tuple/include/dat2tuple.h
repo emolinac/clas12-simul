@@ -29,16 +29,18 @@ void setBranchesAddresses(TTree* t, double* event_index, double* PID, double* pa
 // LEPTONIC CLASS
 
 class LeptonicKinematics{
-  double Q2, Xb, Nu, Px_el, Py_el, Pz_el, P_el, ThetaLab_el, PhiLab_el;
+  double Q2, Xb, Nu, W, y, Px_el, Py_el, Pz_el, P_el, ThetaLab_el, PhiLab_el;
 
 public:
   LeptonicKinematics(double, double, double);
   ~LeptonicKinematics();
 
   //protected:
-  double getQ2()	        	{return Q2;}
-  double getXb()	         	{return Xb;}
-  double getNu()		        {return Nu;}
+  double getQ2()	        {return Q2;}
+  double getXb()	        {return Xb;}
+  double getNu()		{return Nu;}
+  double getW()		        {return W;}
+  double gety()		        {return y;}
   double getP_el()		{return P_el;}
   double getThetaLab_el()	{return ThetaLab_el;}
   double getPhiLab_el()      	{return PhiLab_el;}
@@ -86,11 +88,11 @@ LeptonicKinematics::LeptonicKinematics(double Px, double Py, double Pz){
   TVector3 v(Px, Py, Pz);
 
   // momentum
-  //  P_el		= v.Mag();
   P_el		= TMath::Sqrt(Px*Px + Py*Py + Pz*Pz);
   Px_el		= Px;
   Py_el		= Py;
   Pz_el		= Pz;
+
   // direction
   ThetaLab_el	= v.Theta()*TMath::RadToDeg();
   PhiLab_el	= v.Phi()*TMath::RadToDeg();
@@ -98,11 +100,13 @@ LeptonicKinematics::LeptonicKinematics(double Px, double Py, double Pz){
     PhiLab_el += 360.;
   else if (PhiLab_el > 330.)
     PhiLab_el -= 360.;
+
   // leptonic
-  //  Q2		= 4.*kEbeam*TMath::Sin(ThetaLab_el*TMath::DegToRad()/2.)*TMath::Sin(ThetaLab_el*TMath::DegToRad()/2.);
   Q2		= 4.*kEbeam*P_el*TMath::Sin(v.Theta()/2.)*TMath::Sin(v.Theta()/2.);
   Nu		= kEbeam - P_el;
   Xb		= Q2/2./kMassProton/Nu;
+  W             = TMath::Sqrt(kMassProton*kMassProton + 2.*kMassProton*Nu - Q2);
+  y             = Nu/kEbeam;
 }
 
 LeptonicKinematics::~LeptonicKinematics(){}
