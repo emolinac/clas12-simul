@@ -1,10 +1,7 @@
 <gcard>
-
-	<!-- GCARD BASED ON MILAN'S                                               -->
-
 	<!-- target. Notice variation give the target type. Can be: lH2, lD2, ND3 -->
 	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/targets/cad/"   factory="CAD"/>
-	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/targets/target" factory="TEXT" variation="lH2"/>
+	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/targets/target" factory="TEXT" variation="lD2"/>
 
 	<!-- central detectors 	-->
 	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/bst/bst"               factory="TEXT" variation="default"/>
@@ -57,6 +54,7 @@
 	<option name="FIELD_PROPERTIES" value="clas12-newSolenoid, 1*mm, G4ClassicalRK4, linear"/>
 
 
+	<option name="USE_GUI" value="0"/>
 	<option name="SAVE_ALL_MOTHERS" value="0"/>
 	<option name="RECORD_OPTICALPHOTONS"   value="1"/>
 

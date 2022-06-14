@@ -5,8 +5,9 @@
 #SBATCH --job-name=lepto-gemc
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
-#SBATCH --time=00:30:00
-#SBATCH --array=1-2
+#SBATCH --time=00:10:00
+#SBATCH --mem=1G
+#SBATCH --array=1-100
 
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
 echo "Its name is ${SLURM_JOB_NAME} and its ID is ${SLURM_JOB_ID}"
@@ -45,7 +46,7 @@ AZ_assignation(){
 
 directory_files_check(){
     # checking execution directories
-    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${out_dir} || ! -d ${leptoLUND_dir} ]]
+    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${out_dir_lepto} || ! -d ${leptoLUND_dir} || ! -d ${out_dir_gemc} ]]
     then
 	echo "One of the necessary directories does not exist."
 	exit 1
@@ -75,7 +76,8 @@ dat2tuple_dir=~/clas12_simul/thrown/dat2tuple
 leptoLUND_dir=~/clas12_simul/reconstructed
 gcard_dir=${leptoLUND_dir}
 
-out_dir=/work/clas12/rg-e/emolinac/lepto
+out_dir_lepto=/work/clas12/rg-e/emolinac/lepto
+out_dir_gemc=/work/clas12/rg-e/emolinac/evio
 
 ## VARIABLES
 Nevents=100
@@ -87,18 +89,8 @@ temp_dir=${execution_dir}/${id}
 ###########################################################################
 ###########################       PREAMBLE      ###########################
 ###########################################################################
-
 # Directory and files check
 directory_files_check
-
-# Prereqs setting
-# lepto
-source ~/software/env_scripts/set_all.sh
-# clas12Tags
-source /group/clas12/packages/setup.sh
-module load clas12
-# gemc
-source /site/12gev_phys/softenv.sh 2.5
 
 # Create folder in volatile to not interfere with other lepto executions
 mkdir ${temp_dir}
@@ -107,6 +99,12 @@ cd ${temp_dir}
 ###########################################################################
 ###########################       LEPTO         ###########################
 ###########################################################################
+# Prereqs setting
+if [ -z "${CERN}" ]
+then
+    source ~/software/env_scripts/set_all.sh
+fi
+
 lepto_out=lepto_out_${id}
 z_shift=0.
 
@@ -129,14 +127,16 @@ executable_file_check
 cp ${dat2tuple_dir}/bin/dat2tuple ${temp_dir}/
 ./dat2tuple ${lepto_out}.dat ${lepto_out}_ntuple.root
 
-# Move output to its folder
-#mv ${lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
-mv ${lepto_out}_ntuple.root ${out_dir}/
-
-
 ###########################################################################
 ###########################       GEMC          ###########################
 ###########################################################################
+# Prereqs setting
+if [ -z "${GEMC_DATA_DIR}" ]
+then
+    source /group/clas12/packages/setup.sh
+    module load clas12
+fi
+
 gemc_out=gemc_out_${id}
 
 # Transform lepto's output to LUND format
@@ -148,10 +148,12 @@ perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 cp ${gcard_dir}/clas12.gcard ${temp_dir}/
 
 # EXECUTE GEMC
-gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev"
+gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
 
-# Move gemc's output to final folder
-mv ${gemc_out}.ev ${out_dir}/
+# Move output to its folder
+#mv ${lepto_out}.txt ${lepto_out}.dat ${lepto_out}_ntuple.root ${LUND_lepto_out}.dat ${out_dir_lepto}/
+mv ${lepto_out}_ntuple.root ${out_dir_lepto}/
+mv ${gemc_out}.ev ${out_dir_gemc}/
 
 # Remove folder
 rm -rf ${temp_dir}
