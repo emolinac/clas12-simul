@@ -5,11 +5,11 @@
 #SBATCH --job-name=lepto-gemc
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
-#SBATCH --time=00:20:00
+#SBATCH --time=00:30:00
 #SBATCH --array=1-2
 
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
-
+echo "Its name is ${SLURM_JOB_NAME} and its ID is ${SLURM_JOB_ID}"
 ### FUNCTIONS
 AZ_assignation(){
     # Function to assignate A and Z according to the target specified
