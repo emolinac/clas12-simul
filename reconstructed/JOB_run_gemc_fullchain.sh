@@ -116,6 +116,8 @@ cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
 # Assign the targets A and Z numbers
 AZ_assignation ${target}
 echo "${Nevents} ${A} ${Z}" > lepto_input.txt
+
+# EXECUTE LEPTO
 lepto_${id}.exe < lepto_input.txt > ${lepto_out}.txt
 
 # Transform lepto's output to dat files
@@ -135,7 +137,6 @@ mv ${lepto_out}_ntuple.root ${out_dir}/
 ###########################################################################
 ###########################       GEMC          ###########################
 ###########################################################################
-
 gemc_out=gemc_out_${id}
 
 # Transform lepto's output to LUND format
@@ -145,7 +146,9 @@ perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder
 cp ${gcard_dir}/clas12.gcard ${temp_dir}/
-gemc clas12.gcard -INPUT_GEN_FILE="${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev"
+
+# EXECUTE GEMC
+gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev"
 
 # Move gemc's output to final folder
 mv ${gemc_out}.ev ${out_dir}/
