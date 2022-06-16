@@ -2,11 +2,11 @@
 
 #SBATCH --account=clas12
 #SBATCH --partition=production
-#SBATCH --job-name=lepto
+#SBATCH --job-name=lepto_22gev
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=00:05:00
-#SBATCH --array=1-2000
+#SBATCH --array=1-10
 
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
 
@@ -68,12 +68,12 @@ executable_file_check(){
 }
 
 ## DIRECTORIES
-LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
+LEPTO_dir=~/Lepto64Sim_22gev/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
-lepto2dat_dir=~/clas12_simul/thrown/lepto2dat
-dat2tuple_dir=~/clas12_simul/thrown/dat2tuple
+lepto2dat_dir=~/clas12_simul/thrown_22gev/lepto2dat
+dat2tuple_dir=~/clas12_simul/thrown_22gev/dat2tuple
 
-out_dir=/work/clas12/rg-e/emolinac/lepto
+out_dir=/work/clas12/rg-e/emolinac/lepto_22gev
 
 ## VARIABLES
 Nevents=1000
