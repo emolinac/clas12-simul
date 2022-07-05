@@ -4,10 +4,10 @@
 #SBATCH --partition=production
 #SBATCH --job-name=gemc-rec
 #SBATCH --output=/dev/null
-#SBATCH --error=/dev/null
-#SBATCH --time=02:00:00
+#SBATCH --error=./err/%x.%j.array%a.err
+#SBATCH --time=01:00:00
 #SBATCH --mem=2G
-#SBATCH --array=1-1000
+#SBATCH --array=1-100
 
 #--output=./out/%x.%j.array%a.out
 #--error=./err/%x.%j.array%a.err
@@ -50,7 +50,7 @@ AZ_assignation(){
 
 directory_files_check(){
     # checking execution directories
-    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${out_dir_lepto} || ! -d ${leptoLUND_dir} || ! -d ${out_dir_gemc} ]]
+    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${out_dir_lepto} || ! -d ${leptoLUND_dir} || ! -d ${out_dir_recon} ]]
     then
 	echo "One of the necessary directories does not exist."
 	exit 1
@@ -80,12 +80,11 @@ dat2tuple_dir=~/clas12_simul/thrown/dat2tuple
 leptoLUND_dir=~/clas12_simul/reconstructed
 gcard_dir=${leptoLUND_dir}
 
-out_dir_lepto=/work/clas12/rg-e/emolinac/lepto
-out_dir_gemc=/work/clas12/rg-e/emolinac/evio
-out_dir_recon=/work/clas12/rg-e/emolinac/hipo
+out_dir_lepto=/work/clas12/rg-e/emolinac/lepto_11gev_fullchain
+out_dir_recon=/work/clas12/rg-e/emolinac/hipo_11gev_fullchain
 
 ## VARIABLES
-Nevents=100
+Nevents=750
 target=D
 id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
@@ -156,7 +155,7 @@ cp ${gcard_dir}/clas12.gcard ${temp_dir}/
 gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
 echo "GEMC execution succesful!"
 # Transform to HIPO
-evio2hipo -o ${gemc_out}.hipo ${gemc_out}.ev
+evio2hipo -t -1.0 -s -1.0 -r 11 -o ${gemc_out}.hipo -i ${gemc_out}.ev
 rm ${gemc_out}.ev
 echo "Evio 2 HIPO transformation successful"
 
