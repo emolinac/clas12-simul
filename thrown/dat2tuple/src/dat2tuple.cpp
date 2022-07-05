@@ -32,8 +32,8 @@ int main(int argc, char** argv){
   t->ReadFile(file_in,"event_index/D:PID:parent_PID:Px:Py:Pz:E:x:y:z");
 
   // Create final ntuples
-  TNtuple* ntuple_thrown_electrons	= new TNtuple("ntuple_thrown_electrons","","Q2:Xb:Nu:W:y:ThetaLab:PhiLab:P:Px:Py:Pz");
-  TNtuple* ntuple_thrown		= new TNtuple("ntuple_thrown"          ,"","Q2:Xb:Nu:W:y:Zh:Pt2:Pl2:ThetaPQ:PhiPQ:ThetaLab:PhiLab:P:Px:Py:Pz:ThetaLab_el:PhiLab_el:P_el:Px_el:Py_el:Pz_el:PID");
+  TNtuple* ntuple_thrown_electrons	= new TNtuple("ntuple_thrown_electrons","","Q2:x_{bjorken}:#nu:W:y:#theta:#phi:p:p_{x}:p_{y}:p_{z}");
+  TNtuple* ntuple_thrown	         	= new TNtuple("ntuple_thrown"          ,"","Q2:x_{bjorken}:#nu:W:y:z_{h}:Pt2:Pl2:#theta_{PQ}:#phi_{PQ}:#theta:#phi:p:p_{x}:p_{y}:p_{z}:#theta_{el}:#phi_{el}:p_{el}:p_{xel}:p_{yel}:p_{zel}:pid");
   
   //Process the tree
   Double_t event_index, PID, parent_PID, Px, Py, Pz, E, x, y, z;
