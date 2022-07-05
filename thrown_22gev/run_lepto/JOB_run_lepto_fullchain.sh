@@ -74,8 +74,8 @@ executable_file_check(){
 ## DIRECTORIES
 LEPTO_dir=~/Lepto64Sim_22gev/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
-lepto2dat_dir=~/clas12_simul/thrown_22gev/lepto2dat
-dat2tuple_dir=~/clas12_simul/thrown_22gev/dat2tuple
+lepto2dat_dir=${main_dir}/thrown_22gev/lepto2dat
+dat2tuple_dir=${main_dir}/thrown_22gev/dat2tuple
 
 out_dir=/work/clas12/rg-e/emolinac/lepto_22gev
 

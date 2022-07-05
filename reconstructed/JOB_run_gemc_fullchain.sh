@@ -69,11 +69,12 @@ executable_file_check(){
 }
 
 ## DIRECTORIES
+main_dir=$(pwd)
 LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
-lepto2dat_dir=~/clas12_simul/thrown/lepto2dat
-dat2tuple_dir=~/clas12_simul/thrown/dat2tuple
-leptoLUND_dir=~/clas12_simul/reconstructed
+lepto2dat_dir=${main_dir}/thrown/lepto2dat
+dat2tuple_dir=${main_dir}/thrown/dat2tuple
+leptoLUND_dir=${main_dir}/reconstructed
 gcard_dir=${leptoLUND_dir}
 
 out_dir_lepto=/work/clas12/rg-e/emolinac/lepto

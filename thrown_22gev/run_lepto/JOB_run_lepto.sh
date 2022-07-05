@@ -55,7 +55,7 @@ directory_files_check(){
 }
 
 ## DIRECTORIES
-LEPTO_dir=~/clas12_simul/Lepto64Sim/bin
+LEPTO_dir=~/Lepto64Sim/bin
 execution_dir=/volatile/clas12/emolinac
 out_dir=/work/clas12/rg-e/emolinac/lepto
 
