@@ -15,7 +15,11 @@
 
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
 echo "Its name is ${SLURM_JOB_NAME} and its ID is ${SLURM_JOB_ID}"
-### FUNCTIONS
+
+###########################################################################
+###########################      FUNCTIONS      ###########################
+###########################################################################
+
 AZ_assignation(){
     # Function to assignate A and Z according to the target specified
     if [[ "$1" == "D" || "$1" == "D2" ]]
@@ -72,7 +76,10 @@ executable_file_check(){
     fi
 }
 
-## DIRECTORIES
+###########################################################################
+###########################     DIRECTORIES     ###########################
+###########################################################################
+
 cd ..
 main_dir=$(pwd)
 echo "main dire is ${main_dir}"
@@ -80,13 +87,16 @@ LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=${main_dir}/thrown/lepto2dat
 dat2tuple_dir=${main_dir}/thrown/dat2tuple
-leptoLUND_dir=${main_dir}/reconstructed
+leptoLUND_dir=${main_dir}/reconstructed/utils
 gcard_dir=${leptoLUND_dir}
 
 out_dir_lepto=/work/clas12/rg-e/emolinac/lepto_11gev_fullchain
 out_dir_recon=/work/clas12/rg-e/emolinac/hipo_11gev_fullchain
 
-## VARIABLES
+###########################################################################
+###########################      VARIABLES      ###########################
+###########################################################################
+
 Nevents=750
 target=D
 torus=1
@@ -97,6 +107,7 @@ temp_dir=${execution_dir}/${id}
 ###########################################################################
 ###########################       PREAMBLE      ###########################
 ###########################################################################
+
 echo "Checking directories"
 # Directory and files check
 directory_files_check
@@ -108,6 +119,7 @@ cd ${temp_dir}
 ###########################################################################
 ###########################       LEPTO         ###########################
 ###########################################################################
+
 echo "Running LEPTO"
 # Prereqs setting
 if [ -z "${CERN}" ]
@@ -139,9 +151,11 @@ echo "dat2tuple start"
 cp ${dat2tuple_dir}/bin/dat2tuple ${temp_dir}/
 ./dat2tuple ${lepto_out}.dat ${lepto_out}_ntuple.root
 echo "Finished LEPTO"
+
 ###########################################################################
 ###########################       GEMC          ###########################
 ###########################################################################
+
 # Prereqs setting
 echo "Running GEMC"
 if [ -z "${GEMC_DATA_DIR}" ]
