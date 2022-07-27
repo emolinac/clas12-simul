@@ -105,8 +105,8 @@ LeptonicKinematics::LeptonicKinematics(double Px, double Py, double Pz){
   Q2		= 4.*kEbeam*P_el*TMath::Sin(v.Theta()/2.)*TMath::Sin(v.Theta()/2.);
   Nu		= kEbeam - P_el;
   Xb		= Q2/2./kMassProton/Nu;
-  W             = TMath::Sqrt(kMassProton*kMassProton + 2.*kMassProton*Nu - Q2);
-  y             = Nu/kEbeam;
+  W     = TMath::Sqrt(kMassProton*kMassProton + 2.*kMassProton*Nu - Q2);
+  y     = Nu/kEbeam;
 }
 
 LeptonicKinematics::~LeptonicKinematics(){}

@@ -48,7 +48,7 @@
 
 	<!-- you can scale the fields here. Remember torus -1 means e- INBENDING  -->
 	<option name="SCALE_FIELD" value="TorusSymmetric, TORUS_VALUE"/>
-	<option name="SCALE_FIELD" value="clas12-newSolenoid, -1"/>
+	<option name="SCALE_FIELD" value="clas12-newSolenoid, SOLENOID_VALUE"/>
 
 	<!-- hall field  -->
 	<option name="HALL_FIELD"  value="clas12-newSolenoid"/>
@@ -80,7 +80,7 @@
 
 	<!--  Reference position set as target shift below -->
 	<!-- check this please-->
-	<option name="RFSTART"     value="eventVertex, 0, 0, 0.0" />
+	<option name="RFSTART"     value="eventVertex, 0, 0, Z_SHIFT" />
 
 	<!-- production threshold for passive volumes -->
 	<!-- beamline shielding: 2cm-->
