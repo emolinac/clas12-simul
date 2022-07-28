@@ -5,7 +5,7 @@
 #SBATCH --job-name=gemc-rec
 #SBATCH --output=/dev/null
 #SBATCH --error=./err/%x.%j.array%a.err
-#SBATCH --time=01:00:00
+#SBATCH --time=01:30:00
 #SBATCH --mem=2G
 #SBATCH --array=1-100
 
