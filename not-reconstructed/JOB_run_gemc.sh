@@ -3,7 +3,7 @@
 #SBATCH --account=clas12
 #SBATCH --partition=production
 #SBATCH --job-name=gemc
-#SBATCH --output=/dev/null
+#SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=01:00:00
 #SBATCH --mem=2G
@@ -61,7 +61,7 @@ AZ_assignation(){
 
 directories_check(){
     # checking execution directories
-    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${leptoLUND_dir} || ! -d ${gcard_dir} || ! -d ${out_dir_gemc} || ! -d ${out_dir_lepto}]]
+    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${leptoLUND_dir} || ! -d ${gcard_dir} || ! -d ${out_dir_gemc} || ! -d ${out_dir_lepto} ]]
     then
 	echo "One of the necessary directories does not exist."
 	exit 1
@@ -179,19 +179,24 @@ sed -i "s/TORUS_VALUE/${torus}/g" clas12.gcard
 sed -i "s/SOLENOID_VALUE/${solenoid}/g" clas12.gcard
 sed -i "s/Z_SHIFT/${z_shift}/g" clas12.gcard
 
+# Copy the banks' definition into the temp dir
+cp /group/clas12/gemc/4.4.2/experiments/clas12/dc/dc__bank.txt ${temp_dir}/
+cp /group/clas12/gemc/4.4.2/experiments/clas12/bst/bst__bank.txt ${temp_dir}/
+
 # EXECUTE GEMC
-gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
+gemc clas12.gcard -INTEGRATEDRAW="bst" -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0" -FASTMCMODE="10"
+#gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0" -FASTMCMODE="10"
 echo "GEMC execution succesful!"
 
 # Transform to HIPO
 evio2hipo -t ${torus} -s ${solenoid} -r 11 -o ${gemc_out}.hipo -i ${gemc_out}.ev
-rm ${gemc_out}.ev
+#rm ${gemc_out}.ev
 echo "Evio 2 HIPO transformation successful"
 
 # Move output to its folder
-mv ${lepto_out}_ntuple.root ${out_dir_lepto}/
+#mv ${lepto_out}_ntuple.root ${out_dir_lepto}/
 mv ${gemc_out}.hipo ${out_dir_gemc}/
-
+mv ${gemc_out}.ev ${out_dir_gemc}/
 # Remove folder
 rm -rf ${temp_dir}
 echo "Done!"

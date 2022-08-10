@@ -7,7 +7,7 @@
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=01:30:00
 #SBATCH --mem=2G
-#SBATCH --array=1-100
+#SBATCH --array=1-10
 
 #--output=./out/%x.%j.array%a.out
 #--error=./err/%x.%j.array%a.err
@@ -61,7 +61,7 @@ AZ_assignation(){
 
 directories_check(){
     # checking execution directories
-    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${leptoLUND_dir} || ! -d ${gcard_dir} || ! -d ${out_dir_recon} || ! -d ${out_dir_lepto}]]
+    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${leptoLUND_dir} || ! -d ${gcard_dir} || ! -d ${out_dir_recon} || ! -d ${out_dir_lepto} ]]
     then
 	echo "One of the necessary directories does not exist."
 	exit 1
