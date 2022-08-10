@@ -181,7 +181,7 @@ sed -i "s/SOLENOID_VALUE/${solenoid}/g" clas12.gcard
 sed -i "s/Z_SHIFT/${z_shift}/g" clas12.gcard
 
 # EXECUTE GEMC
-gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
+gemc clas12_fmt.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
 echo "GEMC execution succesful!"
 
 # Transform to HIPO
