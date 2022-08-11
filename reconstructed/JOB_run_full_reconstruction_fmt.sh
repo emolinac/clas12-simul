@@ -176,6 +176,8 @@ perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
 cp ${gcard_dir}/clas12_fmt.gcard ${temp_dir}/
+cp /group/clas12/gemc/4.4.2/experiments/clas12/micromegas/micromegas__bank.txt ${temp_dir}/
+
 sed -i "s/TORUS_VALUE/${torus}/g" clas12_fmt.gcard
 sed -i "s/SOLENOID_VALUE/${solenoid}/g" clas12_fmt.gcard
 

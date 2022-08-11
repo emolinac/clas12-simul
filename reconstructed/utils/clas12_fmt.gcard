@@ -1,7 +1,3 @@
-<!-- 
-	TORUS VALUE IS SET IN THE JOB SCRIPT 
--->
-
 <gcard>
 	<!-- target. Notice variation give the target type. Can be: lH2, lD2, ND3 -->
 	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/targets/cad/"   factory="CAD"/>
