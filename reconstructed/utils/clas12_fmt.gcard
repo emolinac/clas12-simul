@@ -80,7 +80,7 @@
 
 	<!--  Reference position set as target shift below -->
 	<!-- check this please-->
-	<option name="RFSTART"     value="eventVertex, 0, 0, Z_SHIFT" />
+	<option name="RFSTART"     value="eventVertex, 0, 0, 0" />
 
 	<!-- production threshold for passive volumes -->
 	<!-- beamline shielding: 2cm-->

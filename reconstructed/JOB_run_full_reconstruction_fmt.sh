@@ -178,7 +178,6 @@ perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 cp ${gcard_dir}/clas12_fmt.gcard ${temp_dir}/
 sed -i "s/TORUS_VALUE/${torus}/g" clas12_fmt.gcard
 sed -i "s/SOLENOID_VALUE/${solenoid}/g" clas12_fmt.gcard
-sed -i "s/Z_SHIFT/${z_shift}/g" clas12_fmt.gcard
 
 # EXECUTE GEMC
 gemc clas12_fmt.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"

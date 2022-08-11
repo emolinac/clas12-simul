@@ -177,7 +177,6 @@ perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 cp ${gcard_dir}/clas12.gcard ${temp_dir}/
 sed -i "s/TORUS_VALUE/${torus}/g" clas12.gcard
 sed -i "s/SOLENOID_VALUE/${solenoid}/g" clas12.gcard
-sed -i "s/Z_SHIFT/${z_shift}/g" clas12.gcard
 
 # Copy the banks' definition into the temp dir
 cp /group/clas12/gemc/4.4.2/experiments/clas12/dc/dc__bank.txt ${temp_dir}/
