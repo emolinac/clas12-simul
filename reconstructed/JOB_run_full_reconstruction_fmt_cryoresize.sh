@@ -178,8 +178,13 @@ perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 cp ${rec_utils_dir}/${gcard_name}.gcard ${temp_dir}/
 cp /group/clas12/gemc/4.4.2/experiments/clas12/micromegas/micromegas__bank.txt ${temp_dir}/
 
-# Copy the cryotarget model into the execution folder
+# Copy the cryotarget model into the execution folder and 
 cp -r ${rec_utils_dir}/targets/${lD2_length}cmlD2/ ${temp_dir}/
+cd ${rec_utils_dir}/targets/${lD2_length}cmlD2/
+./targets.pl config.dat
+
+# Change some variables in the gcard
+cd ${temp_dir}
 
 sed -i "s/TORUS_VALUE/${torus}/g" ${gcard_name}.gcard
 sed -i "s/SOLENOID_VALUE/${solenoid}/g" ${gcard_name}.gcard
