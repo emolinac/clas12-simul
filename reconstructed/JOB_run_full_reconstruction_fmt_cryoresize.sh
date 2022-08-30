@@ -102,7 +102,7 @@ target=D
 torus=1
 solenoid=-1
 z_shift=0.
-lD2_length=2.
+lD2_length=2 # write just the number!
 
 id=${target}_${lD2_length}cmlD2_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
