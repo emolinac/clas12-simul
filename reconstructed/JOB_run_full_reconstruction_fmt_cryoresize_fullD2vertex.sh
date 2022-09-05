@@ -3,11 +3,11 @@
 #SBATCH --account=clas12
 #SBATCH --partition=production
 #SBATCH --job-name=gemc-rec
-#SBATCH --output=/dev/null
+#SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=01:30:00
 #SBATCH --mem=2G
-#SBATCH --array=1-100
+#SBATCH --array=1-10
 
 #--output=./out/%x.%j.array%a.out
 #--error=./err/%x.%j.array%a.err
@@ -61,7 +61,7 @@ AZ_assignation(){
 
 directories_check(){
     # checking execution directories
-    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${leptoLUND_dir} || ! -d ${gcard_dir} || ! -d ${out_dir_recon} || ! -d ${out_dir_lepto} ]]
+    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${rec_utils_dir} || ! -d ${out_dir_recon} || ! -d ${out_dir_lepto} ]]
     then
 	echo "One of the necessary directories does not exist."
 	exit 1
@@ -88,8 +88,7 @@ LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=${main_dir}/thrown/lepto2dat
 dat2tuple_dir=${main_dir}/thrown/dat2tuple
-leptoLUND_dir=${main_dir}/reconstructed/utils
-gcard_dir=${leptoLUND_dir}
+rec_utils_dir=${main_dir}/reconstructed/utils
 
 out_dir_lepto=/work/clas12/rg-e/emolinac/lepto_11gev_fullchain
 out_dir_recon=/work/clas12/rg-e/emolinac/hipo_11gev_fullchain
@@ -102,10 +101,9 @@ Nevents=750
 target=D
 torus=1
 solenoid=-1
-z_shift=0.
+lD2_length=2 # write just the number!
 
-
-id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
+id=${target}_${lD2_length}cmlD2_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
 
 ###########################################################################
@@ -133,6 +131,11 @@ then
 fi
 
 lepto_out=lepto_out_${id}
+
+# Setting the vertex
+cp ${rec_utils_dir}/*.py .
+rdm=$(python random_gen.py)
+z_shift=$(python vertex.py ${lD2_length} ${rdm})
 
 # Copy lepto executable to temp folder
 cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
@@ -168,19 +171,31 @@ then
 fi
 
 gemc_out=gemc_out_${id}_${target}_s${solenoid}_t${torus}
+gcard_name=clas12_fmt_cryoresize
 
 # Transform lepto's output to LUND format
 LUND_lepto_out=LUND${lepto_out}
-cp ${leptoLUND_dir}/leptoLUND.pl ${temp_dir}/
+cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
 perl leptoLUND.pl 0. < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
-cp ${gcard_dir}/clas12.gcard ${temp_dir}/
-sed -i "s/TORUS_VALUE/${torus}/g" clas12.gcard
-sed -i "s/SOLENOID_VALUE/${solenoid}/g" clas12.gcard
+cp ${rec_utils_dir}/${gcard_name}.gcard ${temp_dir}/
+cp /group/clas12/gemc/4.4.2/experiments/clas12/micromegas/micromegas__bank.txt ${temp_dir}/
+
+# Copy the cryotarget model into the execution folder and 
+cp -r ${rec_utils_dir}/targets/${lD2_length}cmlD2/ ${temp_dir}/
+cd ${rec_utils_dir}/targets/${lD2_length}cmlD2/
+./targets.pl config.dat
+
+# Change some variables in the gcard
+cd ${temp_dir}
+
+sed -i "s/TORUS_VALUE/${torus}/g" ${gcard_name}.gcard
+sed -i "s/SOLENOID_VALUE/${solenoid}/g" ${gcard_name}.gcard
+sed -i "s/CRYOTARGET_VARIATION/${lD2_length}cmlD2/g" ${gcard_name}.gcard
 
 # EXECUTE GEMC
-gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
+gemc ${gcard_name}.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
 echo "GEMC execution succesful!"
 
 # Transform to HIPO
@@ -189,7 +204,7 @@ rm ${gemc_out}.ev
 echo "Evio 2 HIPO transformation successful"
 
 # EXECUTE RECONSTRUCTION
-cp ${gcard_dir}/clas12.yaml ${temp_dir}/
+cp ${rec_utils_dir}/clas12.yaml ${temp_dir}/
 recon-util -y clas12.yaml -i ${gemc_out}.hipo -o ${gemc_out}.rec.hipo
 echo "Reconstruction successful"
 rm ${gemc_out}.hipo

@@ -2,3 +2,5 @@ reconstructed/err/*
 reconstructed/out/*
 not-reconstructed/err/*
 not-reconstructed/out/*
+reconstructed/utils/random_test.sh
+reconstructed/utils/__pycache__

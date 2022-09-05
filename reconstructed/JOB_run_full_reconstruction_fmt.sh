@@ -61,7 +61,7 @@ AZ_assignation(){
 
 directories_check(){
     # checking execution directories
-    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${leptoLUND_dir} || ! -d ${gcard_dir} || ! -d ${out_dir_recon} || ! -d ${out_dir_lepto} ]]
+    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${rec_utils_dir} || ! -d ${out_dir_recon} || ! -d ${out_dir_lepto} ]]
     then
 	echo "One of the necessary directories does not exist."
 	exit 1
@@ -88,8 +88,7 @@ LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=${main_dir}/thrown/lepto2dat
 dat2tuple_dir=${main_dir}/thrown/dat2tuple
-leptoLUND_dir=${main_dir}/reconstructed/utils
-gcard_dir=${leptoLUND_dir}
+rec_utils_dir=${main_dir}/reconstructed/utils
 
 out_dir_lepto=/work/clas12/rg-e/emolinac/lepto_11gev_fullchain
 out_dir_recon=/work/clas12/rg-e/emolinac/hipo_11gev_fullchain
@@ -171,11 +170,11 @@ gemc_out=gemc_out_${id}_${target}_s${solenoid}_t${torus}
 
 # Transform lepto's output to LUND format
 LUND_lepto_out=LUND${lepto_out}
-cp ${leptoLUND_dir}/leptoLUND.pl ${temp_dir}/
-perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
+cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
+perl leptoLUND.pl 0. < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
-cp ${gcard_dir}/clas12_fmt.gcard ${temp_dir}/
+cp ${rec_utils_dir}/clas12_fmt.gcard ${temp_dir}/
 cp /group/clas12/gemc/4.4.2/experiments/clas12/micromegas/micromegas__bank.txt ${temp_dir}/
 
 sed -i "s/TORUS_VALUE/${torus}/g" clas12_fmt.gcard
@@ -191,7 +190,7 @@ rm ${gemc_out}.ev
 echo "Evio 2 HIPO transformation successful"
 
 # EXECUTE RECONSTRUCTION
-cp ${gcard_dir}/clas12.yaml ${temp_dir}/
+cp ${rec_utils_dir}/clas12.yaml ${temp_dir}/
 recon-util -y clas12.yaml -i ${gemc_out}.hipo -o ${gemc_out}.rec.hipo
 echo "Reconstruction successful"
 rm ${gemc_out}.hipo
