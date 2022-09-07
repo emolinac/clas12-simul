@@ -174,9 +174,10 @@ gemc_out=gemc_out_${id}_${target}_s${solenoid}_t${torus}
 gcard_name=clas12_fmt_cryoresize
 
 # Transform lepto's output to LUND format
+# Yes, It is necessary to specify the same z_shift again
 LUND_lepto_out=LUND${lepto_out}
 cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
-perl leptoLUND.pl 0. < ${lepto_out}.txt > ${LUND_lepto_out}.dat
+perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
 cp ${rec_utils_dir}/${gcard_name}.gcard ${temp_dir}/

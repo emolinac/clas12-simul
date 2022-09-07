@@ -171,7 +171,7 @@ gemc_out=gemc_out_${id}_${target}_s${solenoid}_t${torus}
 # Transform lepto's output to LUND format
 LUND_lepto_out=LUND${lepto_out}
 cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
-perl leptoLUND.pl 0. < ${lepto_out}.txt > ${LUND_lepto_out}.dat
+perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
 cp ${rec_utils_dir}/clas12_fmt.gcard ${temp_dir}/

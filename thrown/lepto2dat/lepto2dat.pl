@@ -69,7 +69,7 @@ while (<STDIN>) { # read in a line from stdin
 		    # set vertex positions
 		    $x = 0.;
 		    $y = 0.;
-		    $z = 0. - $z_shift;
+		    $z = 0. + $z_shift;
 
 		    # Print dat format
 		    #   Name                      Position
