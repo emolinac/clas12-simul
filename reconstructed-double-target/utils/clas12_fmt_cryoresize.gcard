@@ -1,7 +1,8 @@
 <gcard>
-	<!-- target. Notice variation give the target type. Can be: 2cmlD2, 3cmlD2, lD2, ND3 -->
-	<detector name="CRYOTARGET_VARIATION/cad/"   factory="CAD"/>
-	<detector name="CRYOTARGET_VARIATION/target" factory="TEXT" variation="CRYOTARGET_VARIATION"/>
+	<!-- Double-target -->
+	<detector name="CRYOTARGET_VARIATION/cad/"            factory="CAD"/>
+	<detector name="CRYOTARGET_VARIATION/dt-structure/"   factory="CAD"/>
+	<detector name="CRYOTARGET_VARIATION/target"          factory="TEXT" variation="TARGET_VARIATION"/>
 
 	<!-- central detectors 	-->
 	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/bst/bst"               factory="TEXT" variation="default"/>
