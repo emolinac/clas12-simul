@@ -134,7 +134,7 @@ lepto_out=lepto_out_${id}
 # Setting the vertex
 cp ${rec_utils_dir}/*.py .
 rdm=$(python random_gen.py)
-z_shift=$(python vertex.py ${lD2_length} ${rdm})
+z_vertex=$(python vertex.py ${lD2_length} ${rdm})
 
 # Copy lepto executable to temp folder
 cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
@@ -149,7 +149,7 @@ lepto_${id}.exe < lepto_input.txt > ${lepto_out}.txt
 echo "LEPTO execution done"
 # Transform lepto's output to dat files
 cp ${lepto2dat_dir}/lepto2dat.pl ${temp_dir}/
-perl lepto2dat.pl ${z_shift} < ${lepto_out}.txt > ${lepto_out}.dat
+perl lepto2dat.pl ${z_vertex} < ${lepto_out}.txt > ${lepto_out}.dat
 echo "lepto2dat done"
 # Transform's dat files into ROOT NTuples
 echo "dat2tuple start"
@@ -175,7 +175,7 @@ gcard_name=clas12_fmt
 # Transform lepto's output to LUND format
 LUND_lepto_out=LUND${lepto_out}
 cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
-perl leptoLUND.pl ${z_shift} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
+perl leptoLUND.pl ${z_vertex} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
 cp ${rec_utils_dir}/${gcard_name}.gcard ${temp_dir}/

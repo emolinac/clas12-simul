@@ -104,14 +104,14 @@ cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
 
 # Execution 
 lepto_out=lepto_out_${id}
-z_shift=0.
+z_vertex=0.
 
 AZ_assignation ${target}
 echo "${Nevents} ${A} ${Z}" > lepto_input.txt
 lepto_${id}.exe < lepto_input.txt > ${lepto_out}.txt
 
 cp ${lepto2dat_dir}/lepto2dat.pl ${temp_dir}/
-perl lepto2dat.pl ${z_shift} < ${lepto_out}.txt > ${lepto_out}.dat
+perl lepto2dat.pl ${z_vertex} < ${lepto_out}.txt > ${lepto_out}.dat
 
 executable_file_check
 cp ${dat2tuple_dir}/bin/dat2tuple ${temp_dir}/

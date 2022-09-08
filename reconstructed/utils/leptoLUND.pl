@@ -14,13 +14,13 @@ $num = 0;
 # event array definition
 @event_array;
 
-($z_shift) = @ARGV;
+($z_vertex) = @ARGV;
 
 my $nargs = @ARGV;
 if($nargs == 0){
     printf "No args passed!\n";
     printf "Usage (Prints directly to screen):\n";
-    printf "perl leptoLund.pl z_shift < original_lepto.out \n";    
+    printf "perl leptoLund.pl z_vertex < original_lepto.out \n";    
     
     exit;
 }
@@ -71,7 +71,7 @@ while (<STDIN>) { # read in a line from stdin
 		    # set vertex positions
 		    $x = 0.;
 		    $y = 0.;
-		    $z = 0. + $z_shift;
+		    $z = 0. + $z_vertex;
 
 		    # Print LUND particles
 		    #                     Name              Position
