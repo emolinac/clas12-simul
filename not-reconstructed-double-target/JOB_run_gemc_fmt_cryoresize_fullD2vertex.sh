@@ -5,9 +5,9 @@
 #SBATCH --job-name=gemc
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
-#SBATCH --time=01:00:00
+#SBATCH --time=01:30:00
 #SBATCH --mem=2G
-#SBATCH --array=1-100
+#SBATCH --array=1-10
 
 #--output=./out/%x.%j.array%a.out
 #--error=./err/%x.%j.array%a.err
@@ -61,7 +61,7 @@ AZ_assignation(){
 
 directories_check(){
     # checking execution directories
-    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${leptoLUND_dir} || ! -d ${gcard_dir} || ! -d ${out_dir_gemc} || ! -d ${out_dir_lepto} ]]
+    if [[ ! -d ${LEPTO_dir} || ! -d ${execution_dir} || ! -d ${lepto2dat_dir} || ! -d ${dat2tuple_dir} || ! -d ${not-rec_utils_dir} || ! -d ${out_dir_gemc} || ! -d ${out_dir_lepto} ]]
     then
 	echo "One of the necessary directories does not exist."
 	exit 1
@@ -88,8 +88,7 @@ LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=${main_dir}/thrown/lepto2dat
 dat2tuple_dir=${main_dir}/thrown/dat2tuple
-leptoLUND_dir=${main_dir}/not-reconstructed/utils
-gcard_dir=${leptoLUND_dir}
+not-rec_utils_dir=${main_dir}/not-reconstructed-double-target/utils
 
 out_dir_lepto=/work/clas12/rg-e/emolinac/lepto_11gev_fullchain
 out_dir_gemc=/work/clas12/rg-e/emolinac/hipo_11gev_notrecon
@@ -102,10 +101,13 @@ Nevents=750
 target=D
 torus=1
 solenoid=-1
-z_vertex=0.
+lD2_length=2 # write just the number!
+cryotarget_variation=${lD2_length}cmlD2
+target_variation=lD2 # Options : lD2, eg2-X, eg2-X-lD2, where X = {C,Al,Cu,Sn,Pb}
 
-id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
+id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
+
 
 ###########################################################################
 ###########################       PREAMBLE      ###########################
@@ -132,6 +134,11 @@ then
 fi
 
 lepto_out=lepto_out_${id}
+
+# Setting the vertex
+cp ${not-rec_utils_dir}/*.py .
+rdm=$(python random_gen.py)
+z_vertex=$(python vertex.py ${lD2_length} ${rdm})
 
 # Copy lepto executable to temp folder
 cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
@@ -166,32 +173,42 @@ then
     module load clas12
 fi
 
-gemc_out=gemc_out_${id}_${target}_s${solenoid}_t${torus}
+gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}
+gcard_name=clas12_fmt_cryoresize
 
 # Transform lepto's output to LUND format
+# Yes, It is necessary to specify the same z_vertex again
 LUND_lepto_out=LUND${lepto_out}
-cp ${leptoLUND_dir}/leptoLUND.pl ${temp_dir}/
+cp ${not-rec_utils_dir}/leptoLUND.pl ${temp_dir}/
 perl leptoLUND.pl ${z_vertex} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
-cp ${gcard_dir}/clas12.gcard ${temp_dir}/
-sed -i "s/TORUS_VALUE/${torus}/g" clas12.gcard
-sed -i "s/SOLENOID_VALUE/${solenoid}/g" clas12.gcard
-
-# Copy the banks' definition into the temp dir
+cp ${not-rec_utils_dir}/${gcard_name}.gcard ${temp_dir}/
+cp /group/clas12/gemc/4.4.2/experiments/clas12/micromegas/micromegas__bank.txt ${temp_dir}/
 cp /group/clas12/gemc/4.4.2/experiments/clas12/dc/dc__bank.txt ${temp_dir}/
 cp /group/clas12/gemc/4.4.2/experiments/clas12/bst/bst__bank.txt ${temp_dir}/
 
+# Copy the cryotarget model into the execution folder and 
+cp -r ${not-rec_utils_dir}/targets/${cryotarget_variation}/ ${temp_dir}/
+cd ${not-rec_utils_dir}/targets/${cryotarget_variation}/
+./targets.pl config.dat
+
+# Change some variables in the gcard
+cd ${temp_dir}
+
+sed -i "s/TORUS_VALUE/${torus}/g" ${gcard_name}.gcard
+sed -i "s/SOLENOID_VALUE/${solenoid}/g" ${gcard_name}.gcard
+sed -i "s/CRYOTARGET_VARIATION/${cryotarget_variation}/g" ${gcard_name}.gcard
+sed -i "s/TARGET_VARIATION/${target_variation}/g" ${gcard_name}.gcard
+
 # EXECUTE GEMC
-gemc clas12.gcard -INTEGRATEDRAW="bst" -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0" -FASTMCMODE="10"
-#gemc clas12.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0" -FASTMCMODE="10"
+gemc ${gcard_name}.gcard -INTEGRATEDRAW="bst,dc,micromegas" -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0" -FASTMCMODE="10"
 echo "GEMC execution succesful!"
 
 # Transform to HIPO
 evio2hipo -t ${torus} -s ${solenoid} -r 11 -o ${gemc_out}.hipo -i ${gemc_out}.ev
 #rm ${gemc_out}.ev
 echo "Evio 2 HIPO transformation successful"
-
 # Move output to its folder
 mv ${gemc_out}.hipo ${out_dir_gemc}/
 mv ${gemc_out}.ev ${out_dir_gemc}/
