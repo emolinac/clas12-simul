@@ -141,11 +141,7 @@ lepto_out=lepto_out_${id}
 # Setting the vertex
 cp ${not-rec_utils_dir}/*.py .
 rdm=$(python random_gen.py)
-z_vertex=$(python vertex.py ${lD2_length} ${rdm})
-if [ "${target}" != "D2" ]
-then
-    z_vertex=5
-fi
+z_vertex=$(python vertex.py ${lD2_length} ${rdm} ${target})
 
 # Copy lepto executable to temp folder
 cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
