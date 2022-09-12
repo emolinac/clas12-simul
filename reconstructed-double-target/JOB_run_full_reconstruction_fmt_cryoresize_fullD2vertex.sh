@@ -5,9 +5,9 @@
 #SBATCH --job-name=gemc-rec
 #SBATCH --output=./out/%x.%j.array%a.out
 #SBATCH --error=./err/%x.%j.array%a.err
-#SBATCH --time=01:30:00
+#SBATCH --time=02:00:00
 #SBATCH --mem=2G
-#SBATCH --array=1-10
+#SBATCH --array=1-630
 
 #--output=./out/%x.%j.array%a.out
 #--error=./err/%x.%j.array%a.err
@@ -102,11 +102,13 @@ torus=1
 solenoid=-1
 # Use    : determine ID, vertex, and set the u/d ratio in LEPTO
 # Values : D2, C, Al, Cu, Sn, Pb
-target=D2
+target=C
 # Use    : determine the dt configuration present
 # Values : lD2, eg2-X, eg2-X-lD2, where X = {C,Al,Cu,Sn,Pb}
-target_variation=lD2
-lD2_length=2 # write just the number!
+# target_variation=eg2-${target}-lD2
+target_variation=eg2-${target}-lD2
+
+lD2_length=3 # write just the number!
 cryotarget_variation=${lD2_length}cmlD2
 
 id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
