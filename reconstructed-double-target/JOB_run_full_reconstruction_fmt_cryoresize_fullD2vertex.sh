@@ -98,12 +98,16 @@ out_dir_recon=/work/clas12/rg-e/emolinac/hipo_11gev_fullchain
 ###########################################################################
 
 Nevents=750
-target=D
 torus=1
 solenoid=-1
+# Use    : determine ID, vertex, and set the u/d ratio in LEPTO
+# Values : D2, C, Al, Cu, Sn, Pb
+target=D2
+# Use    : determine the dt configuration present
+# Values : lD2, eg2-X, eg2-X-lD2, where X = {C,Al,Cu,Sn,Pb}
+target_variation=lD2
 lD2_length=2 # write just the number!
 cryotarget_variation=${lD2_length}cmlD2
-target_variation=lD2 # Options : lD2, eg2-X, eg2-X-lD2, where X = {C,Al,Cu,Sn,Pb}
 
 id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
@@ -139,6 +143,10 @@ lepto_out=lepto_out_${id}
 cp ${rec_utils_dir}/*.py .
 rdm=$(python random_gen.py)
 z_vertex=$(python vertex.py ${lD2_length} ${rdm})
+if [ "${target}" != "D2" ]
+then
+    z_vertex=5
+fi
 
 # Copy lepto executable to temp folder
 cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
