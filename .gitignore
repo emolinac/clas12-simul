@@ -12,3 +12,9 @@ reconstructed-double-target/utils/random_test.sh
 reconstructed-double-target/utils/__pycache__
 not-reconstructed-double-target/utils/random_test.sh
 not-reconstructed-double-target/utils/__pycache__
+reconstructed-double-target/utils/targets/2cmlD2/.nfs*
+reconstructed-double-target/utils/targets/3cmlD2/.nfs*
+reconstructed-double-target/utils/targets/5cmlD2/.nfs*
+not-reconstructed-double-target/utils/targets/2cmlD2/.nfs*
+not-reconstructed-double-target/utils/targets/3cmlD2/.nfs*
+not-reconstructed-double-target/utils/targets/5cmlD2/.nfs*
