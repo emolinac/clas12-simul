@@ -32,7 +32,7 @@ int main(int argc, char** argv){
   t->ReadFile(file_in,"event_index/D:PID:parent_PID:Px:Py:Pz:E:x:y:z");
 
   // Create final ntuples
-  TNtuple* ntuple_thrown_electrons	= new TNtuple("ntuple_thrown_electrons","","Q2:x_{bjorken}:#nu:W:y:#theta:#phi:p:p_{x}:p_{y}:p_{z}");
+  TNtuple* ntuple_thrown_electrons	= new TNtuple("ntuple_thrown_electrons","","Q2:x_{bjorken}:#nu:W:y:#theta:#phi:p:p_{x}:p_{y}:p_{z}:vz");
   TNtuple* ntuple_thrown	         	= new TNtuple("ntuple_thrown"          ,"","Q2:x_{bjorken}:#nu:W:y:z_{h}:Pt2:Pl2:#theta_{PQ}:#phi_{PQ}:#theta:#phi:p:p_{x}:p_{y}:p_{z}:#theta_{el}:#phi_{el}:p_{el}:p_{xel}:p_{yel}:p_{zel}:pid");
   
   //Process the tree
@@ -50,7 +50,7 @@ int main(int argc, char** argv){
       elP[1] = Py;
       elP[2] = Pz;
 
-      ntuple_thrown_electrons->Fill(lk.getQ2(), lk.getXb(), lk.getNu(), lk.getW(), lk.gety(), lk.getThetaLab_el(), lk.getPhiLab_el(), lk.getP_el(), Px, Py, Pz);
+      ntuple_thrown_electrons->Fill(lk.getQ2(), lk.getXb(), lk.getNu(), lk.getW(), lk.gety(), lk.getThetaLab_el(), lk.getPhiLab_el(), lk.getP_el(), Px, Py, Pz, z);
     }
     else if(PID != 11 && PID != 22 && PID !=-11){
       // Calculate hadronic variables
