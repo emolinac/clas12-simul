@@ -26,14 +26,14 @@ errout_check(){
     then
 	echo "Making log out directories!"
 	mkdir ${main_dir}/reconstructed-double-target/err
-    mkdir ${main_dir}/reconstructed-double-target/out
+	mkdir ${main_dir}/reconstructed-double-target/out
     fi
 }
 ################################################################################################
 ############################# Hermes-like script hehe ##########################################
 ################################################################################################
-Njobs=100
-Njobsmax=50
+Njobs=10
+Njobsmax=5
 
 ################################################################################################
 ########################               Directories              ################################
