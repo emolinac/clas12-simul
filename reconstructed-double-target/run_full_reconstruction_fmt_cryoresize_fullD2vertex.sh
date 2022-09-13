@@ -83,6 +83,8 @@ cryotarget_variation=${lD2_length}cmlD2
 id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
 
+echo "Target variation     : ${target_variation}"
+echo "Cryotarget variation : ${cryotarget_variation}"
 
 ###########################################################################
 ###########################       PREAMBLE      ###########################
@@ -108,6 +110,7 @@ lepto_out=lepto_out_${id}
 cp ${rec_utils_dir}/*.py .
 rdm=$(python random_gen.py)
 z_vertex=$(python vertex.py ${lD2_length} ${rdm} ${target})
+echo "Vertex is Z = ${z_vertex}(cm)"
 
 # Copy lepto executable to temp folder
 cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
