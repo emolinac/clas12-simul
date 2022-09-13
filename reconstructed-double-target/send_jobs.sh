@@ -19,15 +19,26 @@ executables_check(){
 	exit 1
     fi
 }
-
+errout_check(){
+    # checking execution directories
+    if [[ ! -d ${main_dir}/reconstructed-double-target/err || ! -d ${main_dir}/reconstructed-double-target/out ]]
+    then
+	echo "Making log out directories!"
+	mkdir ${main_dir}/reconstructed-double-target/err
+    mkdir ${main_dir}/reconstructed-double-target/out
+    fi
+}
 ################################################################################################
 ############################# Hermes-like script hehe ##########################################
 ################################################################################################
 Njobs=100
 Njobsmax=50
+
 ################################################################################################
-########################               Directories              #################################
+########################               Directories              ################################
 ################################################################################################
+cd ..
+main_dir=$(pwd)
 LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=${main_dir}/thrown/lepto2dat
@@ -66,6 +77,7 @@ lD2_length=3
 ################################################################################################
 directories_check
 executables_check
+errout_check
 
 sbatch run_full_reconstruction_fmt_cryoresize_fullD2vertex.sh --array=0-${Njobs}%${Njobsmax} \
 ${LEPTO_dir} ${execution_dir} ${lepto2dat_dir} ${dat2tuple_dir} ${rec_utils_dir} ${out_dir_lepto} ${out_dir_recon} \
