@@ -7,7 +7,6 @@
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=02:00:00
 #SBATCH --mem=2G
-#SBATCH --array=1-630
 
 #--output=./out/%x.%j.array%a.out
 #--error=./err/%x.%j.array%a.err
