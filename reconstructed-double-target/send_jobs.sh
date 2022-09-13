@@ -81,6 +81,6 @@ executables_check
 errout_check
 
 cd ${main_dir}/reconstructed-double-target
-sbatch run_full_reconstruction_fmt_cryoresize_fullD2vertex.sh --array=0-${Njobs}%${Njobsmax} \
+sbatch run_full_reconstruction_fmt_cryoresize_fullD2vertex.sh --array=1-${Njobs}%${Njobsmax} \
 ${LEPTO_dir} ${execution_dir} ${lepto2dat_dir} ${dat2tuple_dir} ${rec_utils_dir} ${out_dir_lepto} ${out_dir_recon} \
 ${Nevents} ${torus} ${solenoid} ${target} ${target_variation} ${lD2_length}

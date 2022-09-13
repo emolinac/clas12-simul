@@ -11,7 +11,6 @@
 #--output=./out/%x.%j.array%a.out
 #--error=./err/%x.%j.array%a.err
 
-
 echo "This is JOB ${SLURM_ARRAY_JOB_ID} task ${SLURM_ARRAY_TASK_ID}"
 echo "Its name is ${SLURM_JOB_NAME} and its ID is ${SLURM_JOB_ID}"
 
@@ -187,8 +186,8 @@ rm ${gemc_out}.hipo
 
 # Move output to its folder
 #mv ${lepto_out}.txt ${lepto_out}.dat ${lepto_out}_ntuple.root ${LUND_lepto_out}.dat ${out_dir_lepto}/
-mv ${lepto_out}_ntuple.root ${out_dir_lepto}/
 mv ${gemc_out}.rec.hipo ${out_dir_recon}/
+mv ${lepto_out}_ntuple.root ${out_dir_lepto}/
 
 # Remove folder
 rm -rf ${temp_dir}
