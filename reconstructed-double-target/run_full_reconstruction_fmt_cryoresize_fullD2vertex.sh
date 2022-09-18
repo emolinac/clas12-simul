@@ -158,7 +158,7 @@ cp /group/clas12/gemc/4.4.2/experiments/clas12/micromegas/micromegas__bank.txt $
 
 # Copy the cryotarget model into the execution folder and 
 cp -r ${rec_utils_dir}/targets/${cryotarget_variation}/ ${temp_dir}/
-cd ${rec_utils_dir}/targets/${cryotarget_variation}/
+cd ${temp_dir}/${cryotarget_variation}
 ./targets.pl config.dat
 
 # Change some variables in the gcard
