@@ -3,7 +3,7 @@
 #SBATCH --account=clas12
 #SBATCH --partition=production
 #SBATCH --job-name=gemc-rec
-#SBATCH --output=./out/%x.%j.array%a.out
+#SBATCH --output=/dev/null
 #SBATCH --error=./err/%x.%j.array%a.err
 #SBATCH --time=02:00:00
 #SBATCH --mem=2G

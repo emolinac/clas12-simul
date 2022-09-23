@@ -32,8 +32,8 @@ errout_check(){
 ################################################################################################
 ############################# Hermes-like script hehe ##########################################
 ################################################################################################
-Njobs=100
-Njobsmax=50
+Njobs=1000
+Njobsmax=25
 
 ################################################################################################
 ########################               Directories              ################################
@@ -56,7 +56,7 @@ out_dir_recon=/volatile/clas12/emolinac/hipo_files
 ################################################################################################
 # Use    : Sets the number of events per job (#electrons)
 # Values : This is the sweet spot between quantity and performance
-Nevents=750
+Nevents=500
 
 # Use    : Sets the scaling of the magnetic fields
 # Values : From -1 to 1
@@ -65,11 +65,11 @@ solenoid=-1
 
 # Use    : Determine ID, vertex, and set the u/d ratio in LEPTO
 # Values : D2, C, Al, Cu, Sn, Pb
-target=D2
+target=C
 
 # Use    : Determine the dt configuration present
 # Values : lD2, eg2-X, eg2-X-lD2, where X = {C,Al,Cu,Sn,Pb}
-target_variation=lD2
+target_variation=eg2-C-lD2
 
 # Use    : Determine the cryotarget length
 # Values : 2, 3, 5 (just the number! do not write points or things like that)
