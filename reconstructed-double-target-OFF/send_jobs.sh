@@ -22,17 +22,17 @@ executables_check(){
 }
 errout_check(){
     # checking execution directories
-    if [[ ! -d ${main_dir}/reconstructed-double-target/err || ! -d ${main_dir}/reconstructed-double-target/out ]]
+    if [[ ! -d ${main_dir}/reconstructed-double-target-OFF/err || ! -d ${main_dir}/reconstructed-double-target-OFF/out ]]
     then
 	echo "Making log out directories!"
-	mkdir ${main_dir}/reconstructed-double-target/err
-	mkdir ${main_dir}/reconstructed-double-target/out
+	mkdir ${main_dir}/reconstructed-double-target-OFF/err
+	mkdir ${main_dir}/reconstructed-double-target-OFF/out
     fi
 }
 ################################################################################################
 ############################# Hermes-like script hehe ##########################################
 ################################################################################################
-Njobs=1000
+Njobs=100
 Njobsmax=25
 
 ################################################################################################
@@ -44,7 +44,7 @@ LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=${main_dir}/thrown/lepto2dat
 dat2tuple_dir=${main_dir}/thrown/dat2tuple
-rec_utils_dir=${main_dir}/reconstructed-double-target/utils
+rec_utils_dir=${main_dir}/reconstructed-double-target-OFF/utils
 
 out_dir_lepto=/volatile/clas12/emolinac/lepto_files
 out_dir_recon=/volatile/clas12/emolinac/hipo_files
@@ -62,12 +62,12 @@ torus=-1
 solenoid=-1
 
 # Use    : Determine ID, vertex, and set the u/d ratio in LEPTO
-# Values : D2, C, Al, Cu, Sn, Pb
-target=C
+# Values : D2
+target=D2
 
 # Use    : Determine the dt configuration present
-# Values : lD2, eg2-X, eg2-X-lD2, where X = {C,Al,Cu,Sn,Pb}
-target_variation=eg2-C-lD2
+# Values : lD2
+target_variation=lD2
 
 # Use    : Determine the cryotarget length
 # Values : 2, 3, 5 (just the number! do not write points or things like that)
@@ -80,7 +80,7 @@ directories_check
 executables_check
 errout_check
 
-cd ${main_dir}/reconstructed-double-target
+cd ${main_dir}/reconstructed-double-target-OFF
 sbatch --array=1-${Njobs}%${Njobsmax} run_full_reconstruction_fmt_cryoresize_fullD2vertex.sh \
 ${LEPTO_dir} ${execution_dir} ${lepto2dat_dir} ${dat2tuple_dir} ${rec_utils_dir} ${out_dir_lepto} ${out_dir_recon} \
 ${Nevents} ${torus} ${solenoid} ${target} ${target_variation} ${lD2_length}
