@@ -181,7 +181,7 @@ then
     module load clas12
 fi
 
-gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}
+gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}_DTOFF
 gcard_name=clas12_fmt_cryoresize
 
 # Transform lepto's output to LUND format
@@ -224,7 +224,7 @@ rm ${gemc_out}.hipo
 
 # Move output to its folder
 #mv ${lepto_out}.txt ${lepto_out}.dat ${lepto_out}_ntuple.root ${LUND_lepto_out}.dat ${out_dir_lepto}/
-mv ${gemc_out}-DTOFF.rec.hipo ${out_dir_recon}/
+mv ${gemc_out}.rec.hipo ${out_dir_recon}/
 mv ${lepto_out}_ntuple.root ${out_dir_lepto}/
 
 # Remove folder
