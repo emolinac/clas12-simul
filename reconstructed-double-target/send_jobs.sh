@@ -33,7 +33,7 @@ errout_check(){
 ############################# Hermes-like script hehe ##########################################
 ################################################################################################
 Njobs=100
-Njobsmax=50
+Njobsmax=25
 
 ################################################################################################
 ########################               Directories              ################################
@@ -46,8 +46,6 @@ lepto2dat_dir=${main_dir}/thrown/lepto2dat
 dat2tuple_dir=${main_dir}/thrown/dat2tuple
 rec_utils_dir=${main_dir}/reconstructed-double-target/utils
 
-#out_dir_lepto=/work/clas12/rg-e/emolinac/lepto_11gev_fullchain
-#out_dir_recon=/work/clas12/rg-e/emolinac/hipo_11gev_fullchain
 out_dir_lepto=/volatile/clas12/emolinac/lepto_files
 out_dir_recon=/volatile/clas12/emolinac/hipo_files
 
@@ -56,7 +54,7 @@ out_dir_recon=/volatile/clas12/emolinac/hipo_files
 ################################################################################################
 # Use    : Sets the number of events per job (#electrons)
 # Values : This is the sweet spot between quantity and performance
-Nevents=750
+Nevents=500
 
 # Use    : Sets the scaling of the magnetic fields
 # Values : From -1 to 1

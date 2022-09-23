@@ -33,7 +33,7 @@ errout_check(){
 ############################# Hermes-like script hehe ##########################################
 ################################################################################################
 Njobs=100
-Njobsmax=50
+Njobsmax=25
 
 ################################################################################################
 ########################               Directories              ################################
@@ -54,7 +54,7 @@ out_dir_recon=/volatile/clas12/emolinac/hipo_files
 ################################################################################################
 # Use    : Sets the number of events per job (#electrons)
 # Values : This is the sweet spot between quantity and performance
-Nevents=750
+Nevents=500
 
 # Use    : Sets the scaling of the magnetic fields
 # Values : From -1 to 1
