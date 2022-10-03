@@ -96,10 +96,6 @@ LeptonicKinematics::LeptonicKinematics(double Px, double Py, double Pz){
   // direction
   ThetaLab_el	= v.Theta()*TMath::RadToDeg();
   PhiLab_el	= v.Phi()*TMath::RadToDeg();
-  if(PhiLab_el < -30.)
-    PhiLab_el += 360.;
-  else if (PhiLab_el > 330.)
-    PhiLab_el -= 360.;
 
   // leptonic
   Q2		= 4.*kEbeam*P_el*TMath::Sin(v.Theta()/2.)*TMath::Sin(v.Theta()/2.);
@@ -127,10 +123,6 @@ HadronicKinematics::HadronicKinematics(double Px, double Py, double Pz, double P
   // direction
   ThetaLab_h	= v.Theta()*TMath::RadToDeg();
   PhiLab_h	= v.Phi()*TMath::RadToDeg();
-  if(PhiLab_h < -30.)
-    PhiLab_h += 360.;
-  else if (PhiLab_h > 330.)
-    PhiLab_h -= 360.;
 }
 
 HadronicKinematics::~HadronicKinematics(){}
