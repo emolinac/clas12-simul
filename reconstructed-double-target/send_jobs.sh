@@ -73,6 +73,14 @@ target_variation=eg2-C-lD2
 # Values : 2, 3, 5 (just the number! do not write points or things like that)
 lD2_length=3
 
+# Use    : Determine which FMT variation will be used
+# Values : michel, slim, rgf_spring2020. FMT layers = {6,6,3}
+fmt_variation=michel
+
+# Use    : Determine the beam energy to set in leptoLUND.pl
+# Values : Check the beam energy on the lepto executable!
+beam_energy=11
+
 ################################################################################################
 ########################                SHOWTIME               #################################
 ################################################################################################
@@ -83,4 +91,4 @@ errout_check
 cd ${main_dir}/reconstructed-double-target
 sbatch --array=1-${Njobs}%${Njobsmax} run_full_reconstruction_fmt_cryoresize_fullD2vertex.sh \
 ${LEPTO_dir} ${execution_dir} ${lepto2dat_dir} ${dat2tuple_dir} ${rec_utils_dir} ${out_dir_lepto} ${out_dir_recon} \
-${Nevents} ${torus} ${solenoid} ${target} ${target_variation} ${lD2_length}
+${Nevents} ${torus} ${solenoid} ${target} ${target_variation} ${lD2_length} ${fmt_variation} ${beam_energy}

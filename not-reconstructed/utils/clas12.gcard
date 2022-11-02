@@ -27,10 +27,10 @@
 
 
 	<!-- Beamline configuration: FT is used -->
-	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/ft/ft"                 factory="TEXT" variation="FTOn"/>
-	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/beamline/cadBeamline/" factory="CAD"/>
+	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/ft/ft"                 factory="TEXT" variation="FTOff"/>
+	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/beamline/cadBeamlineFTOFF/" factory="CAD"/>
 	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/beamline/vacuumLine/"  factory="CAD"/>
-	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/beamline/beamline"     factory="TEXT" variation="FTOn"/>
+	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/beamline/beamline"     factory="TEXT" variation="FTOff"/>
 
 	<!-- forward carriage -->
 	<detector name="/group/clas12/gemc/4.4.2/experiments/clas12/fc/forwardCarriage" factory="TEXT" variation="TorusSymmetric"/>

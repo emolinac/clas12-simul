@@ -14,13 +14,14 @@ $num = 0;
 # event array definition
 @event_array;
 
-($z_vertex) = @ARGV;
+($z_vertex) = $ARGV[0];
+($lepto_energy) = $ARGV[1];
 
 my $nargs = @ARGV;
-if($nargs == 0){
-    printf "No args passed!\n";
+if($nargs == 0 || $nargs == 1){
+    printf "Not enough args passed!\n";
     printf "Usage (Prints directly to screen):\n";
-    printf "perl leptoLund.pl z_vertex < original_lepto.out \n";    
+    printf "perl leptoLund.pl z_vertex beam_energy < original_lepto.out \n";    
     
     exit;
 }
@@ -60,7 +61,7 @@ while (<STDIN>) { # read in a line from stdin
 	    # Print LUND header
 	    # Used by gemc : Number of particles -> 1st arg
 	    #                Beam Polarization   -> 5th arg    
-	    printf "$num 0.0 0.0 0.0 0.0 11 11.0 0.0 0.0 0.0\n";
+	    printf "$num 0.0 0.0 0.0 0.0 11 $lepto_energy 0.0 0.0 0.0\n";
 	    for $particle (@event_array) {
 		# select only final-state particles
 		if ($particle->[1] == 1) {

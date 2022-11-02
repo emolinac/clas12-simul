@@ -76,6 +76,8 @@ solenoid=${10}
 target=${11}
 target_variation=${12}
 lD2_length=${13}
+fmt_variation=${14}
+beam_energy={15}
 
 cryotarget_variation=${lD2_length}cmlD2
 id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
@@ -143,14 +145,14 @@ then
     module load clas12
 fi
 
-gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}
+gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}_fmt${fmt_variation}
 gcard_name=clas12_fmt_cryoresize
 
 # Transform lepto's output to LUND format
 # Yes, It is necessary to specify the same z_vertex again
 LUND_lepto_out=LUND${lepto_out}
 cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
-perl leptoLUND.pl ${z_vertex} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
+perl leptoLUND.pl ${z_vertex} ${beam_energy} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Copy the gcard you'll use into the temp folder and set the torus value
 cp ${rec_utils_dir}/${gcard_name}.gcard ${temp_dir}/
@@ -168,6 +170,7 @@ sed -i "s/TORUS_VALUE/${torus}/g" ${gcard_name}.gcard
 sed -i "s/SOLENOID_VALUE/${solenoid}/g" ${gcard_name}.gcard
 sed -i "s/CRYOTARGET_VARIATION/${cryotarget_variation}/g" ${gcard_name}.gcard
 sed -i "s/TARGET_VARIATION/${target_variation}/g" ${gcard_name}.gcard
+sed -i "s/FMT_VARIATION/${fmt_variation}/g" ${gcard_name}.gcard
 
 # EXECUTE GEMC
 gemc ${gcard_name}.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
