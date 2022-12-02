@@ -32,7 +32,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 1.4890/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -73,7 +73,7 @@ sub build_targets
 
 		# Solid target
 		my $thickness  = 1.4890/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -133,7 +133,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 1.2133/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -173,7 +173,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 1.2133/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -233,7 +233,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 0.3619/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -273,7 +273,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 0.3619/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -333,7 +333,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 0.3032/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -373,7 +373,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 0.3032/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "solidSn";
 		$detector{"mother"}      = "target";
@@ -433,7 +433,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 0.1409/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "Pb";
 		$detector{"mother"}      = "target";
@@ -473,7 +473,7 @@ sub build_targets
 		print_det(\%configuration, \%detector);
 
 		my $thickness  = 0.1409/2.;
-		my $zpos       = 50;
+		my $zpos       = 90;
 		my $radius     = 2.5;
 		$detector{"name"}        = "Pb";
 		$detector{"mother"}      = "target";
