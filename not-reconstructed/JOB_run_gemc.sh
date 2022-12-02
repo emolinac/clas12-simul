@@ -166,7 +166,7 @@ then
     module load clas12
 fi
 
-gemc_out=gemc_out_${id}_${target}_s${solenoid}_t${torus}
+gemc_out=gemc_out_Zeq8_${id}_${target}_s${solenoid}_t${torus}
 
 # Transform lepto's output to LUND format
 LUND_lepto_out=LUND${lepto_out}
