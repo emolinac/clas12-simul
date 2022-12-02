@@ -145,7 +145,7 @@ then
     module load clas12
 fi
 
-gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}_fmt${fmt_variation}
+gemc_out=gemc_out_Zeq6_${id}_${target_variation}_s${solenoid}_t${torus}_fmt${fmt_variation}
 gcard_name=clas12_fmt_cryoresize
 
 # Transform lepto's output to LUND format
