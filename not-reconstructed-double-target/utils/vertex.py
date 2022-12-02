@@ -19,4 +19,4 @@ target    = str(sys.argv[3])
 if target=="D2":
     print ((z_limits[variation-1][0] + rdm*(z_limits[variation-1][1] - z_limits[variation-1][0]))/10.)
 else:
-    print(5.)
+    print(8.)
