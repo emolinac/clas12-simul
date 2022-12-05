@@ -10,3 +10,6 @@ Simple package set to obtain simulations in JLAB's farm.
        2. In bin folder: *./dat2tuple <input_file_name> <output_file_name>*
 ## Reconstructed (GEMC)
 W.I.P.
+
+### Quick notes!
+- Currently using FTOff configuration!
