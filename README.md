@@ -12,4 +12,4 @@ Simple package set to obtain simulations in JLAB's farm.
 W.I.P.
 
 ### Quick notes!
-- Currently using FTOff configuration!
+- Currently using FTOff configuration! (hardcoded in gcards)

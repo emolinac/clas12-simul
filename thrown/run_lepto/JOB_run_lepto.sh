@@ -53,25 +53,42 @@ directory_files_check(){
 	exit 1
     fi
 }
-
+executable_file_check(){
+    # checking dat2tuple executable existence
+    if [[ ! -f ${dat2tuple_dir}/bin/dat2tuple ]]
+    then
+	echo "The dat2tuple executable does not exist"
+	exit 1
+    fi
+}
 ## DIRECTORIES
-LEPTO_dir=~/Lepto64Sim/bin
+main_dir=$(pwd)
+LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
-out_dir=/work/clas12/rg-e/emolinac/lepto
+lepto2dat_dir=${main_dir}/thrown/lepto2dat
+dat2tuple_dir=${main_dir}/thrown/dat2tuple
+
+out_dir=/volatile/clas12/emolinac/only-lepto
 
 ## VARIABLES
 Nevents=1000
 target=D
 id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
+lepto_out=lepto_out_${id}
+beam_energy=11
+z_vertex=0
 
 # Directory and files check
 directory_files_check
 
 # Set required variables for LEPTO execution
-source ~/software/env_scripts/set_all.sh
+if [ -z "${CERN}" ]
+then
+    source ~/software/env_scripts/set_all.sh
+fi
 
-# Create folder in volatile to not interferewith other lepto executions
+# Create folder in volatile to not interfere with other lepto executions
 mkdir ${temp_dir}
 cd ${temp_dir}
 
@@ -81,10 +98,15 @@ cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
 # Execution 
 AZ_assignation ${target}
 echo "${Nevents} ${A} ${Z}" > lepto_input.txt
-lepto_${id}.exe < lepto_input.txt > lepto_out_${id}.txt
+lepto_${id}.exe < lepto_input.txt > ${lepto_out}.txt
+
+# Obtain LUND formated output
+LUND_lepto_out=LUND${lepto_out}
+cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
+perl leptoLUND.pl ${z_vertex} ${beam_energy} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Move output to its folder
-mv lepto_out_${id}.txt ${out_dir}/
+mv ${lepto_out}.txt ${out_dir}/
 
 # Remove folder
 rm -rf ${temp_dir}

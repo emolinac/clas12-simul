@@ -77,14 +77,18 @@ LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
 execution_dir=/volatile/clas12/emolinac
 lepto2dat_dir=${main_dir}/thrown/lepto2dat
 dat2tuple_dir=${main_dir}/thrown/dat2tuple
+rec_utils_dir=${main_dir}/reconstructed-double-target/utils
 
-out_dir=/work/clas12/rg-e/emolinac/lepto
+out_dir=/volatile/clas12/emolinac/only-lepto
 
 ## VARIABLES
 Nevents=1000
 target=D
 id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
+lepto_out=lepto_out_${id}
+beam_energy=11
+z_vertex=0
 
 # Directory and files check
 directory_files_check
@@ -103,9 +107,6 @@ cd ${temp_dir}
 cp ${LEPTO_dir}/lepto.exe ${temp_dir}/lepto_${id}.exe
 
 # Execution 
-lepto_out=lepto_out_${id}
-z_vertex=0.
-
 AZ_assignation ${target}
 echo "${Nevents} ${A} ${Z}" > lepto_input.txt
 lepto_${id}.exe < lepto_input.txt > ${lepto_out}.txt
@@ -117,7 +118,13 @@ executable_file_check
 cp ${dat2tuple_dir}/bin/dat2tuple ${temp_dir}/
 ./dat2tuple ${lepto_out}.dat ${lepto_out}_ntuple.root
 
+# Obtain LUND formated output
+LUND_lepto_out=LUND${lepto_out}
+cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
+perl leptoLUND.pl ${z_vertex} ${beam_energy} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
+
 # Move output to its folder
+#mv ${LUND_lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
 #mv ${lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
 mv ${lepto_out}_ntuple.root ${out_dir}/
 
