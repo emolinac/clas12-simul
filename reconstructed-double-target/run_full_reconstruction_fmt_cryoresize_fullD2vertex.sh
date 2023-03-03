@@ -77,7 +77,8 @@ target=${11}
 target_variation=${12}
 lD2_length=${13}
 fmt_variation=${14}
-beam_energy={15}
+beam_energy=${15}
+upstream_shift=${16}
 
 cryotarget_variation=${lD2_length}cmlD2
 id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
@@ -171,6 +172,7 @@ sed -i "s/SOLENOID_VALUE/${solenoid}/g" ${gcard_name}.gcard
 sed -i "s/CRYOTARGET_VARIATION/${cryotarget_variation}/g" ${gcard_name}.gcard
 sed -i "s/TARGET_VARIATION/${target_variation}/g" ${gcard_name}.gcard
 sed -i "s/FMT_VARIATION/${fmt_variation}/g" ${gcard_name}.gcard
+sed -i "s/UPSTREAM_SHIFT/${upstream_shift}/g" ${gcard_name}.gcard
 
 # EXECUTE GEMC
 gemc ${gcard_name}.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"
