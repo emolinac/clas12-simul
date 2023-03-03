@@ -77,7 +77,7 @@ target=${11}
 target_variation=${12}
 lD2_length=${13}
 fmt_variation=${14}
-beam_energy={15}
+beam_energy=${15}
 
 cryotarget_variation=${lD2_length}cmlD2
 id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
