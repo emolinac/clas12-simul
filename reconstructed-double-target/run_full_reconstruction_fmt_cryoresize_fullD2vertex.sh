@@ -78,7 +78,7 @@ target_variation=${12}
 lD2_length=${13}
 fmt_variation=${14}
 beam_energy=${15}
-upstream_shift=${16}
+shift=${16}
 
 cryotarget_variation=${lD2_length}cmlD2
 id=${target}_${cryotarget_variation}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
@@ -110,7 +110,7 @@ lepto_out=lepto_out_${id}
 # Setting the vertex
 cp ${rec_utils_dir}/*.py .
 rdm=$(python random_gen.py)
-z_vertex=$(python vertex.py ${lD2_length} ${rdm} ${target})
+z_vertex=$(python vertex.py ${lD2_length} ${rdm} ${target} ${shift})
 echo "Vertex is Z = ${z_vertex}(cm)"
 
 # Copy lepto executable to temp folder
@@ -146,7 +146,7 @@ then
     module load clas12
 fi
 
-gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}_fmt${fmt_variation}_usshift${upstream_shift}
+gemc_out=gemc_out_${id}_${target_variation}_s${solenoid}_t${torus}_fmt${fmt_variation}_dtshift${shift}
 gcard_name=clas12_fmt_cryoresize
 
 # Transform lepto's output to LUND format
@@ -172,7 +172,7 @@ sed -i "s/SOLENOID_VALUE/${solenoid}/g" ${gcard_name}.gcard
 sed -i "s/CRYOTARGET_VARIATION/${cryotarget_variation}/g" ${gcard_name}.gcard
 sed -i "s/TARGET_VARIATION/${target_variation}/g" ${gcard_name}.gcard
 sed -i "s/FMT_VARIATION/${fmt_variation}/g" ${gcard_name}.gcard
-sed -i "s/UPSTREAM_SHIFT/${upstream_shift}/g" ${gcard_name}.gcard
+sed -i "s/SHIFT/${shift}/g" ${gcard_name}.gcard
 
 # EXECUTE GEMC
 gemc ${gcard_name}.gcard -INPUT_GEN_FILE="LUND, ${LUND_lepto_out}.dat" -OUTPUT="evio, ${gemc_out}.ev" -USE_GUI="0"

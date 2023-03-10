@@ -81,9 +81,9 @@ fmt_variation=michel
 # Values : Check the beam energy on the lepto executable!
 beam_energy=11
 
-# Use    : Determine double-target upstream shift in cm
+# Use    : Determine double-target shift in cm
 # Values : Anything reasonable!
-upstream_shift=-15.
+shift=-15.
 
 ################################################################################################
 ########################                SHOWTIME               #################################
@@ -96,4 +96,4 @@ cd ${main_dir}/reconstructed-double-target
 sbatch --array=1-${Njobs}%${Njobsmax} run_full_reconstruction_fmt_cryoresize_fullD2vertex.sh \
 ${LEPTO_dir} ${execution_dir} ${lepto2dat_dir} ${dat2tuple_dir} ${rec_utils_dir} ${out_dir_lepto} ${out_dir_recon} \
 ${Nevents} ${torus} ${solenoid} ${target} ${target_variation} ${lD2_length} ${fmt_variation} ${beam_energy} \
-${upstream_shift}
+${shift}
