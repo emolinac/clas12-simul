@@ -6,7 +6,7 @@
 #SBATCH --output=/dev/null
 #SBATCH --error=/dev/null
 #SBATCH --time=00:05:00
-#SBATCH --array=1-10000
+#SBATCH --array=1-10
 
 
 # --output=./out/%x.%j.array%a.out
