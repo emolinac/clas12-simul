@@ -72,12 +72,13 @@ executable_file_check(){
 }
 
 ## DIRECTORIES
+cd ..
 main_dir=$(pwd)
-LEPTO_dir=~/Lepto64Sim/bin ## CHECK THIS DIRECTORY!
+LEPTO_dir=${main_dir}/LEPTO/bin
 execution_dir=/volatile/clas12/emolinac
-lepto2dat_dir=${main_dir}/thrown/lepto2dat
-dat2tuple_dir=${main_dir}/thrown/dat2tuple
-rec_utils_dir=${main_dir}/reconstructed-double-target/utils
+lepto2dat_dir=${main_dir}/lepto2dat
+dat2tuple_dir=${main_dir}/dat2tuple
+thr_utils_dir=${main_dir}/LEPTO/Utilities
 
 out_dir=/volatile/clas12/emolinac/only-lepto
 
@@ -87,7 +88,7 @@ target=D
 id=${target}_${SLURM_ARRAY_JOB_ID}${SLURM_ARRAY_TASK_ID}
 temp_dir=${execution_dir}/${id}
 lepto_out=lepto_out_${id}
-beam_energy=11
+beam_energy=10.6
 z_vertex=0
 
 # Directory and files check
@@ -120,13 +121,13 @@ cp ${dat2tuple_dir}/bin/dat2tuple ${temp_dir}/
 
 # Obtain LUND formated output
 LUND_lepto_out=LUND${lepto_out}
-cp ${rec_utils_dir}/leptoLUND.pl ${temp_dir}/
+cp ${thr_utils_dir}/leptoLUND.pl ${temp_dir}/
 perl leptoLUND.pl ${z_vertex} ${beam_energy} < ${lepto_out}.txt > ${LUND_lepto_out}.dat
 
 # Move output to its folder
-#mv ${LUND_lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
+mv ${lepto_out}.dat ${LUND_lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
 #mv ${lepto_out}.dat ${lepto_out}_ntuple.root ${out_dir}/
-mv ${lepto_out}_ntuple.root ${out_dir}/
+#mv ${lepto_out}_ntuple.root ${out_dir}/
 
 # Remove folder
 rm -rf ${temp_dir}
