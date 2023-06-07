@@ -115,14 +115,13 @@ HadronicKinematics::HadronicKinematics(double Px, double Py, double Pz, double P
   PID_h = PID;
   
   // momentum
-  //  P_h		= v.Mag();
-  P_h           = TMath::Sqrt(Px*Px + Py*Py + Pz*Pz);
-  Px_h		= Px;
-  Py_h		= Py;
-  Pz_h		= Pz;
+  P_h   = TMath::Sqrt(Px*Px + Py*Py + Pz*Pz);
+  Px_h	= Px;
+  Py_h	= Py;
+  Pz_h	= Pz;
   // direction
-  ThetaLab_h	= v.Theta()*TMath::RadToDeg();
-  PhiLab_h	= v.Phi()*TMath::RadToDeg();
+  ThetaLab_h = v.Theta()*TMath::RadToDeg();
+  PhiLab_h	 = v.Phi()*TMath::RadToDeg();
 }
 
 HadronicKinematics::~HadronicKinematics(){}
@@ -210,6 +209,14 @@ double HadronicKinematics::getZh(LeptonicKinematics* lk) {
   double P_h  = this->getP_h();
   double Nu   = lk->getNu();
 
+  if(this->PID_h==211)
+  {
+    std::cout<<"For Pi+ the specs are"<<std::endl;
+    std::cout<<"Momentum = "<<P_h<<std::endl;
+    std::cout<<"Mass = "<<mass<<std::endl;
+    std::cout<<"Zh = "<<TMath::Sqrt(mass*mass + P_h)/Nu<<std::endl;
+  }
+  
   return TMath::Sqrt(mass*mass + P_h)/Nu;
 }
 double HadronicKinematics::getPt2(LeptonicKinematics* lk) {

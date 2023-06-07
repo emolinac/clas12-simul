@@ -70,7 +70,7 @@ c     FERMI :
   
       lst(19) = -1    !D-10 choice of the grid
       lst(23) = 1    ! which process simulated, e.g. electromagnetic
-      lst(25) = 1    ! flavor of struck quark, 1=d, 2=u 
+      lst(25) = 2    ! flavor of struck quark, 1=d, 2=u 
       lst(26) = 5    ! entry line in event record of struck quark
       lst(27) = 1    ! split of non-trivial nucleon remnant
       lst(31) = 1    ! vairiables of integration are (x,Q2)
@@ -91,12 +91,11 @@ c     Pythia PYDAT1 : COMMON/PYDAT1/MSTU(200), PARU(200),MSTJ(200),PARJ(200)
    
 c     These are for the general survey plots
       cut(1)  = 0.01   ! 0.02 ! lower limit Bj x
-      cut(2)  = 0.9    ! 0.90 !upper limit Bj x
+      cut(2)  = 0.8    ! 0.90 !upper limit Bj x
       cut(3)  = 0.     ! lower limit y
       cut(4)  = 1.     ! upper limit y
-      cut(5)  = 0.8    ! 0.1 ! 0.8    ! lower limit Q2
+      cut(5)  = 1.0    ! 0.1 ! 0.8    ! lower limit Q2
       cut(6)  = plz    ! 10upper limit Q2 
-c      cut(6)  = 22.    ! 10upper limit Q2 
       cut(7)  = 4.     ! 4 ! lower limit W2
       cut(8)  = 20.    ! upper limit W2 !lepto.f l.277 
 c      cut(8)  = 22.    ! upper limit W2 !lepto.f l.277 

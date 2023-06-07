@@ -1,6 +1,13 @@
 # CLAS12 simulations
 This branch is designed to obtain generated events with LEPTO at a 10.6GeV beam energy
 
+## Prereqs
+To use this software it is necesary to install https://github.com/utfsm-eg2-data-analysis/clas_software in your top directory.
+
+## Necessary Steps Before Use
+- In **JOB_run_lept_fullchain.sh** change the **out_dir** variable.
+- 
+
 ## Key Codes
 - **JOB_run_lepto_fullchain.sh** : bash script to be submitted in JLAB's farm to obtain the txt outputs used by lepto2dat. Modify the directories according to your needs
 - **lepto2dat** : perl code modified from W. Brooks' original code. It transforms the output of lepto to a .dat file that can be easily read by *dat2tuple*.
