@@ -210,7 +210,7 @@ double HadronicKinematics::getZh(LeptonicKinematics* lk) {
   double P_h  = this->getP_h();
   double Nu   = lk->getNu();
 
-  return TMath::Sqrt(mass*mass + P_h)/Nu;
+  return TMath::Sqrt(mass*mass + P_h*P_h)/Nu;
 }
 double HadronicKinematics::getPt2(LeptonicKinematics* lk) {
   // Returns the square of the transverse momentum component w.r.t. the virtual photon direction
