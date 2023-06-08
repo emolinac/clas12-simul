@@ -45,14 +45,12 @@ int main(int argc, char** argv){
     t->GetEntry(entry1);
     if(PID==11 && parent_PID==0){
       // Calculate leptonic variables
-      LeptonicKinematics lk(Px,Py,Pz);
-      elP[0] = Px;
-      elP[1] = Py;
-      elP[2] = Pz;
-
-      ntuple_thrown_electrons->Fill(lk.getQ2(), lk.getXb(), lk.getNu(), lk.getW(), lk.gety(), lk.getThetaLab_el(), lk.getPhiLab_el(), lk.getP_el(), Px, Py, Pz, z);
+      elP[0] = Px; elP[1] = Py; elP[2] = Pz;
+      LeptonicKinematics lk(elP[0],elP[1],elP[2]);
+      
+      ntuple_thrown_electrons->Fill(lk.getQ2(), lk.getXb(), lk.getNu(), lk.getW(), lk.gety(), lk.getThetaLab_el(), lk.getPhiLab_el(), lk.getP_el(), elP[0], elP[1], elP[2], z);
     }
-    else if(PID != 11 && PID != 22 && PID !=-11){
+    else if(/*PID != 11 && PID != 22 && PID !=-11*/PID==211){
       // Calculate hadronic variables
       LeptonicKinematics lk(elP[0],elP[1],elP[2]);
       HadronicKinematics hk(Px,Py,Pz,PID);

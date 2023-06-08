@@ -209,15 +209,7 @@ double HadronicKinematics::getZh(LeptonicKinematics* lk) {
   double P_h  = this->getP_h();
   double Nu   = lk->getNu();
 
-  if(this->PID_h==211)
-  {
-    std::cout<<"For Pi+ the specs are"<<std::endl;
-    std::cout<<"Momentum = "<<P_h<<std::endl;
-    std::cout<<"Mass = "<<mass<<std::endl;
-    std::cout<<"Zh = "<<TMath::Sqrt(mass*mass + P_h)/Nu<<std::endl;
-  }
-  
-  return TMath::Sqrt(mass*mass + P_h)/Nu;
+  return TMath::Sqrt(mass*mass + P_h*P_h)/Nu;
 }
 double HadronicKinematics::getPt2(LeptonicKinematics* lk) {
   // Returns the square of the transverse momentum component w.r.t. the virtual photon direction
