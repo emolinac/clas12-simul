@@ -8,6 +8,9 @@ To use this software it is necesary to install https://github.com/utfsm-eg2-data
 - In **JOB_run_lept_fullchain.sh** change the **out_dir** variable.
 - In **JOB_run_lept_fullchain.sh**, specify the number of jobs in line 9; specifically, change the second number.
 
+## How to obtain thrown simulations?
+Go to the thrown folder and execute **send_jobs.sh**
+
 ## Key Codes
 - **send_jobs.sh**: bash script to submit jobs
 - **JOB_run_lepto_fullchain.sh** : job script to be submitted to JLAB's farm.
